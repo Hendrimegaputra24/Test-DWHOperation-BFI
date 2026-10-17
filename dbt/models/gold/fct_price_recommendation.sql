@@ -19,5 +19,6 @@ select
     cast(null as text)             as rule_applied,
     cast(null as text)             as model_version,
     cast(null as text)             as run_id,
-    cast(null as timestamptz)      as run_ts
+    cast(null as timestamptz)      as run_ts,
+    cast(null as jsonb)            as parameters
 where false

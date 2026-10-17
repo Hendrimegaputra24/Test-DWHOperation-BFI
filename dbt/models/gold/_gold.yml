@@ -51,6 +51,36 @@ models:
       - name: pack_size
         description: Ukuran kemasan dalam satuan dasar, mis. "520 ml" atau "770 g".
 
+  - name: dim_platform_listing
+    description: >
+      Dimensi riwayat bertipe SCD Tipe 2. GRAIN: satu baris per listing produk di satu platform,
+      per versi atribut. Atribut yang dilacak adalah nama listing dan produk kanonik yang cocok.
+      valid_from adalah tanggal crawl pertama versi itu terlihat, valid_to adalah hari sebelum versi
+      berikutnya mulai (9999-12-31 untuk versi yang berlaku saat ini). Dibuat dari riwayat observasi,
+      bukan dbt snapshot, agar riwayat bisa dibentuk dari data historis yang dimuat sekaligus.
+    columns:
+      - name: listing_version_key
+        description: Hash dari listing_key dan valid_from.
+        data_tests: [unique, not_null]
+      - name: listing_key
+        data_tests: [not_null]
+      - name: platform_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_platform')
+                field: platform_key
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product_master')
+                field: product_key
+      - name: is_current
+        data_tests: [not_null]
+
   - name: fct_product_price_daily
     description: >
       Tabel fakta harga harian. GRAIN: satu baris per produk, per platform, per tanggal crawl
@@ -116,7 +146,21 @@ models:
               arguments:
                 to: ref('dim_product_master')
                 field: product_key
+      - name: recommended_price_idr
+        description: Harga yang direkomendasikan (dibulatkan ke Rp 100).
+      - name: rule_applied
+        description: undercut_median (median kompetitor dikurangi persentase) atau margin_floor (dibatasi batas bawah).
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['undercut_median', 'margin_floor']
       - name: model_version
         description: Versi aturan/model yang menghasilkan rekomendasi (untuk jejak audit).
+        data_tests: [not_null]
+      - name: run_id
+        description: Pengenal run batch terakhir yang menulis baris ini.
       - name: run_ts
         description: Waktu run batch yang menghasilkan rekomendasi.
+        data_tests: [not_null]
+      - name: parameters
+        description: Parameter aturan yang dipakai (undercut, asumsi rasio biaya, margin minimum).

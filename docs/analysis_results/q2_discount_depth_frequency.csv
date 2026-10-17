@@ -1,0 +1,19 @@
+category,platform_name,observation_days,discounted_days,discount_frequency_pct,avg_discount_depth_pct,max_discount_pct
+Bumbu & Masakan,Blibli,249,33,13.3,17.5,25.2
+Bumbu & Masakan,Klik Indomaret,270,19,7.0,9.0,15.0
+Bumbu & Masakan,Tokopedia,277,40,14.4,12.4,19.8
+Deterjen & Pembersih,Blibli,217,23,10.6,19.7,25.1
+Deterjen & Pembersih,Klik Indomaret,166,14,8.4,9.3,15.0
+Deterjen & Pembersih,Tokopedia,217,27,12.4,13.0,20.2
+Minuman,Blibli,84,8,9.5,18.8,24.7
+Minuman,Klik Indomaret,84,6,7.1,10.8,13.9
+Minuman,Tokopedia,84,14,16.7,10.4,16.0
+Perawatan Mulut,Blibli,135,18,13.3,16.8,24.2
+Perawatan Mulut,Klik Indomaret,138,10,7.2,11.0,14.9
+Perawatan Mulut,Tokopedia,137,24,17.5,13.1,20.3
+Perawatan Rambut,Blibli,194,17,8.8,17.9,24.9
+Perawatan Rambut,Klik Indomaret,191,11,5.8,8.7,14.0
+Perawatan Rambut,Tokopedia,166,23,13.9,12.1,20.0
+Sabun Mandi,Blibli,189,18,9.5,17.3,25.0
+Sabun Mandi,Klik Indomaret,193,10,5.2,9.4,12.8
+Sabun Mandi,Tokopedia,164,24,14.6,11.6,18.4

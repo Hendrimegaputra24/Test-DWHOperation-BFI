@@ -1,0 +1,22 @@
+day_of_week,day_name,platform_name,day_pairs,price_changes,price_change_rate_pct,price_drops,price_rises
+1,Senin,Blibli,155,14,9.0,8,6
+1,Senin,Klik Indomaret,149,24,16.1,8,16
+1,Senin,Tokopedia,144,48,33.3,7,41
+2,Selasa,Blibli,153,17,11.1,9,8
+2,Selasa,Klik Indomaret,149,17,11.4,8,9
+2,Selasa,Tokopedia,146,17,11.6,9,8
+3,Rabu,Blibli,150,23,15.3,13,10
+3,Rabu,Klik Indomaret,148,17,11.5,8,9
+3,Rabu,Tokopedia,148,24,16.2,13,11
+4,Kamis,Blibli,149,19,12.8,6,13
+4,Kamis,Klik Indomaret,145,14,9.7,6,8
+4,Kamis,Tokopedia,148,23,15.5,10,13
+5,Jumat,Blibli,108,41,38.0,38,3
+5,Jumat,Klik Indomaret,108,12,11.1,4,8
+5,Jumat,Tokopedia,110,15,13.6,7,8
+6,Sabtu,Blibli,143,66,46.2,24,42
+6,Sabtu,Klik Indomaret,143,23,16.1,16,7
+6,Sabtu,Tokopedia,147,69,46.9,58,11
+7,Minggu,Blibli,150,33,22.0,4,29
+7,Minggu,Klik Indomaret,145,24,16.6,11,13
+7,Minggu,Tokopedia,145,85,58.6,31,54
