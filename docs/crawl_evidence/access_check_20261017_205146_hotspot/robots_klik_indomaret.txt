@@ -1,0 +1,7 @@
+
+    User-agent: *
+    Disallow: /api/
+    Allow: /
+
+    Sitemap: https://www.klikindomaret.com/sitemap.xml
+  

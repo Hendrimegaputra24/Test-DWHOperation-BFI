@@ -1,45 +1,79 @@
 version: 2
-
 sources:
   - name: raw
-    description: >
-      Data hasil crawl yang mendarat apa adanya (append-only), tanpa logika bisnis.
-      Diisi oleh loader Python (src/load_raw.py).
+    description: 'Data hasil crawl yang mendarat apa adanya (append-only), tanpa logika bisnis. Diisi oleh loader Python (src/load_raw.py).
+
+      '
     schema: raw
     config:
       loaded_at_field: crawled_at
       freshness:
-        warn_after: {count: 36, period: hour}
-        error_after: {count: 72, period: hour}
-
+        warn_after:
+          count: 36
+          period: hour
+        error_after:
+          count: 72
+          period: hour
     tables:
       - name: crawl_product_price
-        description: >
-          Satu baris = satu hasil crawl sebuah produk di satu platform pada satu waktu.
-          Harga dan diskon masih berupa teks mentah (mis. "Rp 12.500").
+        description: 'Satu baris = satu hasil crawl sebuah produk di satu platform pada satu waktu. Harga dan diskon masih berupa teks mentah (mis. "Rp 12.500").
+
+          '
         columns:
           - name: raw_id
             description: Kunci surrogate otomatis, hanya untuk identitas baris di raw.
-            data_tests: [unique, not_null]
+            data_tests:
+              - unique
+              - not_null
           - name: platform
             description: Nama platform sumber.
             data_tests:
               - not_null
               - accepted_values:
                   arguments:
-                    values: ['Klik Indomaret', 'Blibli', 'Tokopedia']
+                    values:
+                      - Klik Indomaret
+                      - Blibli
+                      - Tokopedia
           - name: source_url
             description: Alamat sumber produk (untuk data sintetis berformat synthetic://...).
-            data_tests: [not_null]
+            data_tests:
+              - not_null
           - name: crawled_at
             description: Waktu crawl (zona waktu disertakan). Dasar pengecekan freshness.
-            data_tests: [not_null]
+            data_tests:
+              - not_null
+          - name: crawl_date
+            description: Tanggal crawl menurut zona waktu Asia/Jakarta (kolom turunan otomatis).
+          - name: crawler_version
+            description: Versi crawler atau generator yang menghasilkan baris.
           - name: payload_hash
             description: SHA-256 isi hasil crawl tanpa crawled_at; dasar idempotency.
-            data_tests: [not_null]
+            data_tests:
+              - not_null
           - name: data_source
             description: live = hasil crawl asli, synthetic = dataset sampel buatan.
             data_tests:
               - accepted_values:
                   arguments:
-                    values: ['live', 'synthetic']
+                    values:
+                      - live
+                      - synthetic
+          - name: source_file
+            description: Nama berkas JSONL asal baris.
+          - name: ingested_at
+            description: Waktu baris dimuat ke database.
+          - name: product_name
+            description: Nama produk apa adanya dari platform.
+          - name: price_text
+            description: Harga sebagai teks mentah, mis. 'Rp 14.500'.
+          - name: original_price_text
+            description: Harga sebelum diskon sebagai teks mentah (bisa kosong).
+          - name: discount_text
+            description: Diskon sebagai teks mentah, mis. '9%' (bisa kosong).
+          - name: detail
+            description: Deskripsi produk apa adanya.
+          - name: breadcrumb
+            description: Label kategori dari platform.
+          - name: raw_payload
+            description: Isi baris sebagaimana diterima (JSON).

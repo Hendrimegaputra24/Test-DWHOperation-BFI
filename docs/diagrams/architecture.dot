@@ -1,0 +1,42 @@
+digraph G {
+  rankdir=LR; compound=true; fontname="Helvetica"; nodesep=0.35; ranksep=0.7; bgcolor="white";
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#455a64", fillcolor="#eceff1"];
+  edge [fontname="Helvetica", fontsize=9, color="#455a64"];
+
+  subgraph cluster_src { label="Sumber data"; style="rounded,dashed"; color="#90a4ae"; fontsize=12;
+    web  [label="Klik Indomaret\nBlibli\nTokopedia\n(menolak crawler saat diuji)", fillcolor="#ffebee"];
+    samp [label="Dataset sampel (JSONL)\n40 produk x 3 platform x 28 hari\nSINTETIS", fillcolor="#e8f5e9"];
+  }
+
+  subgraph cluster_ing { label="Ingestion (Python)"; style="rounded"; color="#90a4ae"; fontsize=12;
+    crawl [label="crawler.py\nrobots.txt, jeda, selector + cadangan,\nvalidasi Pydantic, alert", fillcolor="#e3f2fd"];
+    load  [label="load_raw.py\nvalidasi, ON CONFLICT DO NOTHING\n(idempotent)", fillcolor="#e3f2fd"];
+  }
+
+  subgraph cluster_pg { label="PostgreSQL 16 (container db)"; style="rounded,filled"; color="#90a4ae"; fillcolor="#fafafa"; fontsize=12;
+    raw    [label="schema raw\ncrawl_product_price\nappend-only, apa adanya", fillcolor="#efebe9"];
+    silver [label="schema silver\nharga jadi angka, satuan baku,\npencocokan produk, dedup,\nbaris bermasalah ditandai", fillcolor="#eeeeee"];
+    gold   [label="schema gold (star schema)\n4 dimensi + 2 fakta + view rpt_*", fillcolor="#fff8e1"];
+  }
+
+  dbt [label="dbt Core\nseed, model, tes, docs", shape=component, fillcolor="#f3e5f5"];
+
+  subgraph cluster_use { label="Pemakai gold"; style="rounded"; color="#90a4ae"; fontsize=12;
+    rec  [label="recommend.py\nmodel batch rekomendasi harga", fillcolor="#e0f2f1"];
+    api  [label="FastAPI :8000\nJWT, peran analyst/admin\n/docs (OpenAPI)", fillcolor="#e0f2f1"];
+    mb   [label="Metabase :3000\nakun khusus-baca metabase_ro", fillcolor="#e0f2f1"];
+  }
+
+  orch [label="pipeline.py + docker compose\n(satu perintah: docker compose up)", shape=note, fillcolor="#fffde7"];
+
+  web -> crawl [label="HTTP (sopan)"];
+  crawl -> load [label="JSONL\n(live)"];
+  samp -> load  [label="JSONL\n(cadangan)"];
+  load -> raw;
+  raw -> silver [label="dbt"]; silver -> gold [label="dbt"];
+  dbt -> silver [style=dashed, arrowhead=none, constraint=false];
+  gold -> rec [dir=both, label="baca / tulis\nfct_price_recommendation"];
+  gold -> api [label="baca"];
+  gold -> mb  [label="baca"];
+  orch -> load [style=dotted, label="menjalankan", constraint=false];
+}

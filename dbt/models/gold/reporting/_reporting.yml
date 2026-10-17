@@ -1,54 +1,168 @@
 version: 2
-
 models:
   - name: rpt_price_comparison
     description: Matriks harga terakhir per produk di tiga platform, dengan selisih dan platform termurah. Untuk dashboard.
     columns:
       - name: product_name
-        data_tests: [unique, not_null]
+        description: Nama produk.
+        data_tests:
+          - unique
+          - not_null
+      - name: brand
+        description: Merek produk.
+      - name: category
+        description: Kategori produk.
+      - name: as_of_date
+        description: Tanggal terbaru di antara harga terakhir yang tersedia di tiap platform.
+      - name: price_klik_indomaret
+        description: Harga di Klik Indomaret.
+      - name: price_blibli
+        description: Harga di Blibli.
+      - name: price_tokopedia
+        description: Harga di Tokopedia.
+      - name: min_price
+        description: Harga terendah di antara platform.
+      - name: max_price
+        description: Harga tertinggi di antara platform.
+      - name: spread_pct
+        description: Selisih harga tertinggi dan terendah dibagi rata-rata harga, dalam persen.
       - name: cheapest_platform
+        description: Platform dengan harga terendah.
         data_tests:
           - accepted_values:
               arguments:
-                values: ['Klik Indomaret', 'Blibli', 'Tokopedia']
-
+                values:
+                  - Klik Indomaret
+                  - Blibli
+                  - Tokopedia
   - name: rpt_price_history_by_product
     description: Riwayat harga harian per produk dan platform. Untuk grafik garis dengan filter produk.
     columns:
+      - name: price_date
+        description: Tanggal harga diamati (tanggal crawl).
+      - name: product_name
+        description: Nama produk.
+      - name: brand
+        description: Merek produk.
+      - name: category
+        description: Kategori produk.
+      - name: platform_name
+        description: Nama platform sumber.
       - name: price_idr
-        data_tests: [not_null]
-
+        description: Harga jual dalam rupiah (angka).
+        data_tests:
+          - not_null
+      - name: original_price_idr
+        description: Harga sebelum diskon pada hari itu.
+      - name: discount_pct
+        description: Persentase diskon, dihitung dari harga jual dan harga sebelum diskon.
   - name: rpt_discount_trend_daily
     description: Tren diskon harian per platform (frekuensi dan kedalaman).
     columns:
+      - name: price_date
+        description: Tanggal harga diamati (tanggal crawl).
+      - name: platform_name
+        description: Nama platform sumber.
+      - name: listings
+        description: Jumlah listing yang diamati pada hari itu.
+      - name: discounted_listings
+        description: Jumlah listing yang sedang diskon.
       - name: discount_frequency_pct
-        data_tests: [not_null]
-
+        description: Persentase listing yang sedang diskon.
+        data_tests:
+          - not_null
+      - name: avg_discount_depth_pct
+        description: Rata-rata besar diskon (persen), hanya untuk listing yang diskon.
   - name: rpt_recommendation_vs_competitors
     description: Rekomendasi harga terbaru per produk dibandingkan harga kompetitor pada tanggal yang sama.
     columns:
       - name: product_name
-        data_tests: [unique]
+        description: Nama produk.
+        data_tests:
+          - unique
+      - name: category
+        description: Kategori produk.
+      - name: recommendation_date
+        description: Tanggal rekomendasi terbaru untuk produk.
+      - name: recommended_price_idr
+        description: Harga rekomendasi.
+      - name: competitor_median_price_idr
+        description: Median harga kompetitor pada tanggal itu.
+      - name: competitor_min_price_idr
+        description: Harga kompetitor terendah pada tanggal itu.
+      - name: price_klik_indomaret
+        description: Harga di Klik Indomaret.
+      - name: price_blibli
+        description: Harga di Blibli.
+      - name: price_tokopedia
+        description: Harga di Tokopedia.
+      - name: price_floor_idr
+        description: Batas bawah harga rekomendasi.
+      - name: gap_vs_median_pct
+        description: Selisih harga rekomendasi terhadap median kompetitor, dalam persen (negatif berarti di bawah median).
       - name: rule_applied
+        description: 'Aturan yang menentukan rekomendasi: undercut_median atau margin_floor.'
         data_tests:
           - accepted_values:
               arguments:
-                values: ['undercut_median', 'margin_floor']
-
+                values:
+                  - undercut_median
+                  - margin_floor
+      - name: model_version
+        description: Versi aturan atau model yang menghasilkan rekomendasi.
+      - name: run_ts
+        description: Waktu run batch yang menghasilkan rekomendasi.
   - name: rpt_pipeline_health
     description: Kesehatan data per platform (crawl terakhir, jumlah baris, status kesegaran).
     columns:
+      - name: platform_name
+        description: Nama platform sumber.
+      - name: last_crawled_at
+        description: Waktu crawl terakhir pada platform ini.
+      - name: latest_price_date
+        description: Tanggal harga terbaru pada platform ini.
+      - name: fact_rows
+        description: Jumlah baris di tabel fakta harga harian.
+      - name: products_covered
+        description: Jumlah produk yang punya harga valid pada platform ini.
+      - name: days_covered
+        description: Jumlah hari yang punya data.
+      - name: hours_since_last_crawl
+        description: Jam sejak crawl terakhir.
       - name: freshness_status
+        description: 'Status kesegaran data: FRESH (36 jam atau kurang), WARN (sampai 72 jam), STALE (lebih dari 72 jam).'
         data_tests:
           - accepted_values:
               arguments:
-                values: ['FRESH', 'WARN', 'STALE']
-
+                values:
+                  - FRESH
+                  - WARN
+                  - STALE
   - name: rpt_pipeline_summary
     description: Ringkasan kesehatan pipeline dalam satu baris.
     columns:
+      - name: latest_crawl_at
+        description: Waktu crawl terbaru di seluruh platform.
+      - name: hours_since_latest_crawl
+        description: Jam sejak crawl terbaru.
       - name: freshness_status
+        description: 'Status kesegaran data: FRESH (36 jam atau kurang), WARN (sampai 72 jam), STALE (lebih dari 72 jam).'
         data_tests:
           - accepted_values:
               arguments:
-                values: ['FRESH', 'WARN', 'STALE']
+                values:
+                  - FRESH
+                  - WARN
+                  - STALE
+      - name: fact_rows
+        description: Jumlah baris di tabel fakta harga harian.
+      - name: products
+        description: Jumlah produk kanonik di tabel fakta.
+      - name: platforms
+        description: Jumlah platform di tabel fakta.
+      - name: recommendation_rows
+        description: Jumlah baris rekomendasi.
+      - name: last_recommendation_run_ts
+        description: Waktu run rekomendasi terakhir.
+      - name: last_model_version
+        description: Versi model rekomendasi terakhir.

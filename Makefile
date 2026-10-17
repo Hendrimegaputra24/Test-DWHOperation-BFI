@@ -3,7 +3,7 @@
 -include .env
 export
 
-.PHONY: init up down reset logs pipeline load dbt dbt-docs recommend api test analyses
+.PHONY: init up down reset logs pipeline load dbt dbt-docs recommend api test analyses access-check
 
 init:        ## salin .env.example menjadi .env (tidak menimpa yang sudah ada)
 	cp -n .env.example .env
@@ -43,3 +43,6 @@ test:        ## tes otomatis API
 
 analyses:    ## jalankan analisis SQL dan simpan CSV
 	python src/run_analyses.py
+
+access-check: ## uji akses situs sumber dan buat laporan bukti (isi LABEL=nama-jaringan)
+	python src/check_access.py --label $(LABEL)

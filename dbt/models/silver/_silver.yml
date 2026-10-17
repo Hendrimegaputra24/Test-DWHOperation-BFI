@@ -1,40 +1,68 @@
 version: 2
-
 models:
   - name: stg_crawl_product_price
-    description: >
-      Tahap pembersihan pertama dari raw: teks harga dan diskon diubah menjadi angka,
-      ukuran kemasan dinormalisasi ke satuan dasar (ml, g, pcs), dan dibuat kunci
-      pencocokan produk (match_key) yang tidak peka urutan kata, huruf besar-kecil,
-      maupun penulisan satuan.
+    description: 'Tahap pembersihan pertama dari raw: teks harga dan diskon diubah menjadi angka, ukuran kemasan dinormalisasi ke satuan dasar (ml, g, pcs), dan dibuat kunci pencocokan produk (match_key) yang tidak peka urutan kata, huruf besar-kecil, maupun penulisan satuan.
+
+      '
     columns:
       - name: raw_id
         description: Kunci baris di raw.
-        data_tests: [unique, not_null]
+        data_tests:
+          - unique
+          - not_null
+      - name: platform
+        description: Nama platform sumber (Klik Indomaret, Blibli, Tokopedia).
+      - name: source_url
+        description: Alamat halaman produk di platform (untuk data sintetis berformat synthetic://...).
+      - name: crawled_at
+        description: Waktu crawl, dengan zona waktu.
+      - name: crawl_date
+        description: Tanggal crawl menurut zona waktu Asia/Jakarta.
+      - name: crawler_version
+        description: Versi crawler atau generator yang menghasilkan baris.
+      - name: data_source
+        description: 'Asal data: live (hasil crawl asli) atau synthetic (dataset sampel buatan).'
+      - name: product_name
+        description: Nama produk.
+      - name: breadcrumb
+        description: Label kategori dari platform (berbeda tiap platform).
       - name: price_idr
         description: Harga dalam rupiah (angka). Kosong bila teks harga tidak ada.
+      - name: original_price_idr
+        description: Harga sebelum diskon dalam rupiah. Sama dengan harga jual bila tidak ada diskon.
+      - name: discount_pct_raw
+        description: Angka diskon yang terbaca dari teks (belum divalidasi; bisa di luar 0 sampai 100).
+      - name: pack_qty_base
+        description: Jumlah kemasan dalam satuan dasar (mis. 520 untuk 520 ml; 1 L menjadi 1000 ml).
       - name: pack_unit_base
         description: Satuan dasar kemasan (ml untuk ml/L, g untuk g/kg, pcs).
         data_tests:
           - not_null
           - accepted_values:
               arguments:
-                values: ['ml', 'g', 'pcs']
+                values:
+                  - ml
+                  - g
+                  - pcs
+      - name: name_clean
+        description: Nama produk huruf kecil, tanpa ukuran dan tanda baca.
+      - name: name_key
+        description: Kata-kata unik nama produk (tanpa kata promosi), diurutkan.
       - name: match_key
-        description: >
-          Kata-kata nama produk (tanpa ukuran dan kata promosi) diurutkan, digabung dengan
-          ukuran dasar. Produk yang sama di platform berbeda menghasilkan kunci yang sama.
-        data_tests: [not_null]
+        description: 'Kata-kata nama produk (tanpa ukuran dan kata promosi) diurutkan, digabung dengan ukuran dasar. Produk yang sama di platform berbeda menghasilkan kunci yang sama.
 
+          '
+        data_tests:
+          - not_null
   - name: silver_price_observation
-    description: >
-      Satu baris per listing per hari. Bila ada beberapa crawl di hari yang sama,
-      crawl terbaru dipakai. Baris bermasalah tidak dibuang, melainkan ditandai
-      lewat is_valid dan dq_issue; layer gold hanya memakai baris valid.
+    description: 'Satu baris per listing per hari. Bila ada beberapa crawl di hari yang sama, crawl terbaru dipakai. Baris bermasalah tidak dibuang, melainkan ditandai lewat is_valid dan dq_issue; layer gold hanya memakai baris valid.
+
+      '
     columns:
       - name: listing_key
         description: Hash dari platform dan source_url (satu listing produk di satu platform).
-        data_tests: [not_null]
+        data_tests:
+          - not_null
       - name: product_key
         description: Kunci produk kanonik hasil pencocokan.
         data_tests:
@@ -44,10 +72,36 @@ models:
                 to: ref('silver_product_master')
                 field: product_key
       - name: platform
+        description: Nama platform sumber (Klik Indomaret, Blibli, Tokopedia).
         data_tests:
           - accepted_values:
               arguments:
-                values: ['Klik Indomaret', 'Blibli', 'Tokopedia']
+                values:
+                  - Klik Indomaret
+                  - Blibli
+                  - Tokopedia
+      - name: source_url
+        description: Alamat halaman produk di platform (untuk data sintetis berformat synthetic://...).
+      - name: crawl_date
+        description: Tanggal crawl menurut zona waktu Asia/Jakarta.
+      - name: crawled_at
+        description: Waktu crawl terbaru pada hari itu (yang dipakai).
+      - name: product_name
+        description: Nama produk.
+      - name: brand
+        description: Merek produk.
+      - name: category_from_breadcrumb
+        description: Kategori hasil pemetaan label platform (kosong bila tidak terpetakan).
+      - name: pack_qty_base
+        description: Jumlah kemasan dalam satuan dasar (mis. 520 untuk 520 ml; 1 L menjadi 1000 ml).
+      - name: pack_unit_base
+        description: 'Satuan dasar kemasan: ml, g, atau pcs.'
+      - name: match_key
+        description: 'Kunci pencocokan: kata-kata nama produk (tanpa ukuran dan kata promosi) diurutkan, digabung dengan ukuran dasar.'
+      - name: price_idr
+        description: Harga jual dalam rupiah (angka).
+      - name: original_price_idr
+        description: Harga sebelum diskon dalam rupiah. Sama dengan harga jual bila tidak ada diskon.
       - name: discount_pct
         description: Diskon dihitung dari harga dan harga asli (bukan dari teks diskon).
       - name: dq_issue
@@ -55,30 +109,65 @@ models:
         data_tests:
           - accepted_values:
               arguments:
-                values: ['price_missing', 'price_not_positive', 'discount_out_of_range', 'price_gt_original']
+                values:
+                  - price_missing
+                  - price_not_positive
+                  - discount_out_of_range
+                  - price_gt_original
       - name: is_valid
-        data_tests: [not_null]
-
+        description: Benar bila tidak ada masalah kualitas data. Hanya baris valid yang masuk ke gold.
+        data_tests:
+          - not_null
+      - name: data_source
+        description: 'Asal data: live (hasil crawl asli) atau synthetic (dataset sampel buatan).'
+      - name: raw_id
+        description: Kunci baris di tabel raw.
   - name: silver_product_master
-    description: >
-      Satu baris per produk kanonik. Brand dari daftar brand (seed), kategori dari
-      pemetaan breadcrumb platform yang tidak ambigu (seed), nama kanonik dari nama
-      pertama yang terlihat (prioritas Blibli, Klik Indomaret, lalu Tokopedia).
+    description: 'Satu baris per produk kanonik. Brand dari daftar brand (seed), kategori dari pemetaan breadcrumb platform yang tidak ambigu (seed), nama kanonik dari nama pertama yang terlihat (prioritas Blibli, Klik Indomaret, lalu Tokopedia).
+
+      '
     columns:
       - name: product_key
-        data_tests: [unique, not_null]
+        description: Kunci produk kanonik (hash dari match_key). Menghubungkan ke dim_product_master.
+        data_tests:
+          - unique
+          - not_null
+      - name: canonical_name
+        description: 'Nama produk kanonik: nama pertama yang terlihat (prioritas Blibli, Klik Indomaret, lalu Tokopedia).'
       - name: brand
-        data_tests: [not_null]
+        description: Merek produk.
+        data_tests:
+          - not_null
       - name: category
+        description: Kategori produk.
         data_tests:
           - not_null
           - accepted_values:
               arguments:
-                values: ['Bumbu & Masakan', 'Minuman', 'Perawatan Rambut', 'Sabun Mandi', 'Perawatan Mulut', 'Deterjen & Pembersih', 'Tidak terklasifikasi']
+                values:
+                  - Bumbu & Masakan
+                  - Minuman
+                  - Perawatan Rambut
+                  - Sabun Mandi
+                  - Perawatan Mulut
+                  - Deterjen & Pembersih
+                  - Tidak terklasifikasi
+      - name: pack_qty_base
+        description: Jumlah kemasan dalam satuan dasar (mis. 520 untuk 520 ml; 1 L menjadi 1000 ml).
+      - name: pack_unit_base
+        description: 'Satuan dasar kemasan: ml, g, atau pcs.'
+      - name: pack_size
+        description: Ukuran kemasan dalam satuan dasar, mis. '520 ml'.
       - name: n_platforms
         description: Jumlah platform tempat produk ini ditemukan.
         data_tests:
           - accepted_values:
               arguments:
-                values: [2, 3]
+                values:
+                  - 2
+                  - 3
                 quote: false
+      - name: first_seen_date
+        description: Tanggal pertama produk terlihat.
+      - name: match_key
+        description: 'Kunci pencocokan: kata-kata nama produk (tanpa ukuran dan kata promosi) diurutkan, digabung dengan ukuran dasar.'

@@ -69,6 +69,17 @@ def emit(level, event, **fields):
     _log.log(level, event, extra={"fields": fields})
 
 
+def load_env_file(path: Path) -> None:
+    """Baca .env sederhana (KEY=VALUE); nilai yang sudah ada di environment tidak ditimpa."""
+    if not path.exists():
+        return
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip())
+
+
 # ----------------------------------------------------------------- pengambil halaman
 @dataclass
 class FetchResult:
@@ -426,6 +437,7 @@ def exit_code(results: list[PlatformResult]) -> int:
 
 
 def main() -> int:
+    load_env_file(ROOT / ".env")
     ap = argparse.ArgumentParser(description="Crawler harga (sopan, tanpa menyiasati proteksi)")
     ap.add_argument("--config", default=os.environ.get("CRAWLER_CONFIG") or str(ROOT / "config" / "selectors.yml"))
     ap.add_argument("--platform", action="append", help="batasi ke platform tertentu (boleh diulang)")

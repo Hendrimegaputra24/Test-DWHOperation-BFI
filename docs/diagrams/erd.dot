@@ -1,0 +1,74 @@
+digraph ERD {
+  rankdir=LR; fontname="Helvetica"; nodesep=0.5; ranksep=1.1; bgcolor="white";
+  node [shape=plain, fontname="Helvetica", fontsize=10];
+  edge [fontname="Helvetica", fontsize=9, color="#546e7a", arrowhead=crow, arrowtail=none];
+
+  dim_date [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#e3f2fd">
+      <TR><TD BGCOLOR="#1565c0"><FONT COLOR="white"><B>dim_date</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK date_key</B> (YYYYMMDD)</TD></TR>
+      <TR><TD ALIGN="LEFT">date, year, quarter, month</TD></TR>
+      <TR><TD ALIGN="LEFT">month_name, iso_week</TD></TR>
+      <TR><TD ALIGN="LEFT">day_of_week, day_name, is_weekend</TD></TR>
+    </TABLE>>];
+
+  dim_platform [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#e3f2fd">
+      <TR><TD BGCOLOR="#1565c0"><FONT COLOR="white"><B>dim_platform</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK platform_key</B></TD></TR>
+      <TR><TD ALIGN="LEFT">platform_name, platform_code</TD></TR>
+      <TR><TD ALIGN="LEFT">platform_type, base_url</TD></TR>
+    </TABLE>>];
+
+  dim_product [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#e3f2fd">
+      <TR><TD BGCOLOR="#1565c0"><FONT COLOR="white"><B>dim_product_master</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK product_key</B></TD></TR>
+      <TR><TD ALIGN="LEFT">product_name, brand, category</TD></TR>
+      <TR><TD ALIGN="LEFT">pack_qty_base, pack_unit_base, pack_size</TD></TR>
+      <TR><TD ALIGN="LEFT">n_platforms, first_seen_date</TD></TR>
+    </TABLE>>];
+
+  dim_listing [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#ede7f6">
+      <TR><TD BGCOLOR="#5e35b1"><FONT COLOR="white"><B>dim_platform_listing (SCD Tipe 2)</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK listing_version_key</B></TD></TR>
+      <TR><TD ALIGN="LEFT">listing_key, version_no</TD></TR>
+      <TR><TD ALIGN="LEFT">FK platform_key, FK product_key</TD></TR>
+      <TR><TD ALIGN="LEFT">source_url, listing_name</TD></TR>
+      <TR><TD ALIGN="LEFT">valid_from, valid_to, is_current</TD></TR>
+      <TR><TD ALIGN="LEFT"><I>Grain: satu listing per versi atribut</I></TD></TR>
+    </TABLE>>];
+
+  fct_price [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#fff8e1">
+      <TR><TD BGCOLOR="#ef6c00"><FONT COLOR="white"><B>fct_product_price_daily</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">FK date_key, FK product_key, FK platform_key</TD></TR>
+      <TR><TD ALIGN="LEFT">listing_key, price_date</TD></TR>
+      <TR><TD ALIGN="LEFT">price_idr, original_price_idr</TD></TR>
+      <TR><TD ALIGN="LEFT">discount_amount_idr, discount_pct, is_discounted</TD></TR>
+      <TR><TD ALIGN="LEFT">data_source, last_crawled_at</TD></TR>
+      <TR><TD ALIGN="LEFT"><I>Grain: 1 baris per produk, platform, tanggal</I></TD></TR>
+      <TR><TD ALIGN="LEFT"><I>Incremental (lookback 3 hari)</I></TD></TR>
+    </TABLE>>];
+
+  fct_rec [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#fff8e1">
+      <TR><TD BGCOLOR="#ef6c00"><FONT COLOR="white"><B>fct_price_recommendation</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK recommendation_key</B></TD></TR>
+      <TR><TD ALIGN="LEFT">FK date_key, FK product_key</TD></TR>
+      <TR><TD ALIGN="LEFT">competitor_median / min_price_idr, competitor_count</TD></TR>
+      <TR><TD ALIGN="LEFT">price_floor_idr, recommended_price_idr</TD></TR>
+      <TR><TD ALIGN="LEFT">rule_applied, model_version, run_id, run_ts, parameters</TD></TR>
+      <TR><TD ALIGN="LEFT"><I>Grain: 1 baris per produk, tanggal, versi model</I></TD></TR>
+    </TABLE>>];
+
+  fct_price -> dim_date     [label="N : 1"];
+  fct_price -> dim_platform [label="N : 1"];
+  fct_price -> dim_product  [label="N : 1"];
+  fct_rec   -> dim_date     [label="N : 1"];
+  fct_rec   -> dim_product  [label="N : 1"];
+  dim_listing -> dim_platform [label="N : 1"];
+  dim_listing -> dim_product  [label="N : 1"];
+  fct_price -> dim_listing  [style=dashed, arrowhead=none, label="listing_key + rentang\nvalid_from..valid_to"];
+}

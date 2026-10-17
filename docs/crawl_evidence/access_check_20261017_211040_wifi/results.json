@@ -1,0 +1,214 @@
+{
+  "label": "wifi",
+  "user_agent": "PriceResearchBot/1.0 (+henrymegaputra@gmail.com)",
+  "attempts": 2,
+  "delay_seconds": 5.0,
+  "generated_at_utc": "2026-10-17T14:11:53+00:00",
+  "generated_at_wib": "2026-10-17T21:11:53+07:00",
+  "environment": {
+    "python": "3.12.3",
+    "os": "Windows-11-10.0.26200-SP0",
+    "requests": "2.34.2"
+  },
+  "robots": [
+    {
+      "platform": "Klik Indomaret",
+      "robots_url": "https://www.klikindomaret.com/robots.txt",
+      "status": 200,
+      "bytes": 110,
+      "block_reason": null
+    },
+    {
+      "platform": "Blibli",
+      "robots_url": "https://www.blibli.com/robots.txt",
+      "status": 403,
+      "bytes": 394477,
+      "block_reason": "http_403"
+    },
+    {
+      "platform": "Tokopedia",
+      "robots_url": "https://www.tokopedia.com/robots.txt",
+      "status": 200,
+      "bytes": 4698,
+      "block_reason": null
+    }
+  ],
+  "skipped": [],
+  "results": [
+    {
+      "platform": "Klik Indomaret",
+      "url": "https://www.klikindomaret.com/",
+      "started_at_utc": "2026-10-17T14:10:41+00:00",
+      "started_at_wib": "2026-10-17T21:10:41+07:00",
+      "status": 200,
+      "final_url": "https://www.klikindomaret.com/",
+      "redirects": 0,
+      "elapsed_ms": 97,
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Server": "cloudflare",
+        "CF-RAY": "a4bfe363088f44af-SIN"
+      },
+      "bytes": 3539,
+      "sha256": "bd45dd042b42e2afd4c4e46e37f71ffdd3de1c350fdaa0b3f495dd205fa2350d",
+      "title": null,
+      "price_mentions": 0,
+      "cloudflare_headers": true,
+      "block_reason": null,
+      "product_cards": 0,
+      "verdict": "OPEN_NO_PRODUCT_DATA",
+      "saved_response": "responses/klik_indomaret_01.html",
+      "attempt": 1
+    },
+    {
+      "platform": "Klik Indomaret",
+      "url": "https://www.klikindomaret.com/",
+      "started_at_utc": "2026-10-17T14:10:46+00:00",
+      "started_at_wib": "2026-10-17T21:10:46+07:00",
+      "status": 200,
+      "final_url": "https://www.klikindomaret.com/",
+      "redirects": 0,
+      "elapsed_ms": 102,
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Server": "cloudflare",
+        "CF-RAY": "a4bfe38328d844af-SIN"
+      },
+      "bytes": 3539,
+      "sha256": "9db2c9b2f3738a5cc532e8c87f47144c97a0d31e7b43819e242872b93292ed92",
+      "title": null,
+      "price_mentions": 0,
+      "cloudflare_headers": true,
+      "block_reason": null,
+      "product_cards": 0,
+      "verdict": "OPEN_NO_PRODUCT_DATA",
+      "saved_response": "responses/klik_indomaret_02.html",
+      "attempt": 2
+    },
+    {
+      "platform": "Blibli",
+      "url": "https://www.blibli.com/",
+      "started_at_utc": "2026-10-17T14:10:53+00:00",
+      "started_at_wib": "2026-10-17T21:10:53+07:00",
+      "status": 403,
+      "final_url": "https://www.blibli.com/",
+      "redirects": 0,
+      "elapsed_ms": 1548,
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Cf-Mitigated": "challenge",
+        "Server": "cloudflare",
+        "CF-RAY": "a4bfe3b2df93df74-CGK"
+      },
+      "bytes": 394426,
+      "sha256": "4aef886039a5fa97e465b44a843b25a209e8e7652c2fc28844b018c4ee1f5422",
+      "title": "Online Mall Blibli, Belanja Online Aman, Nyaman &amp; Terpercaya!",
+      "price_mentions": 6,
+      "cloudflare_headers": true,
+      "block_reason": "http_403",
+      "product_cards": 0,
+      "verdict": "REFUSED_403",
+      "saved_response": "responses/blibli_03.html",
+      "attempt": 1
+    },
+    {
+      "platform": "Blibli",
+      "url": "https://www.blibli.com/",
+      "started_at_utc": "2026-10-17T14:10:59+00:00",
+      "started_at_wib": "2026-10-17T21:10:59+07:00",
+      "status": 403,
+      "final_url": "https://www.blibli.com/",
+      "redirects": 0,
+      "elapsed_ms": 1149,
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Cf-Mitigated": "challenge",
+        "Server": "cloudflare",
+        "CF-RAY": "a4bfe3d9ef90dfa8-CGK"
+      },
+      "bytes": 394426,
+      "sha256": "f9d05e7cc827762b8b32d46ec73d1a7840f019b5223dedbf3efd5ff29bb69e8b",
+      "title": "Online Mall Blibli, Belanja Online Aman, Nyaman &amp; Terpercaya!",
+      "price_mentions": 7,
+      "cloudflare_headers": true,
+      "block_reason": "http_403",
+      "product_cards": 0,
+      "verdict": "REFUSED_403",
+      "saved_response": "responses/blibli_04.html",
+      "attempt": 2
+    },
+    {
+      "platform": "Tokopedia",
+      "url": "https://www.tokopedia.com/",
+      "started_at_utc": "2026-10-17T14:11:07+00:00",
+      "started_at_wib": "2026-10-17T21:11:07+07:00",
+      "status": null,
+      "error_type": "ReadTimeout",
+      "error_message": "HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=20)",
+      "elapsed_ms": 20017,
+      "bytes": 0,
+      "sha256": null,
+      "title": null,
+      "price_mentions": 0,
+      "cloudflare_headers": false,
+      "block_reason": null,
+      "product_cards": 0,
+      "verdict": "CONNECTION_ERROR",
+      "attempt": 1
+    },
+    {
+      "platform": "Tokopedia",
+      "url": "https://www.tokopedia.com/",
+      "started_at_utc": "2026-10-17T14:11:32+00:00",
+      "started_at_wib": "2026-10-17T21:11:32+07:00",
+      "status": null,
+      "error_type": "ReadTimeout",
+      "error_message": "HTTPSConnectionPool(host='www.tokopedia.com', port=443): Read timed out. (read timeout=20)",
+      "elapsed_ms": 21318,
+      "bytes": 0,
+      "sha256": null,
+      "title": null,
+      "price_mentions": 0,
+      "cloudflare_headers": false,
+      "block_reason": null,
+      "product_cards": 0,
+      "verdict": "CONNECTION_ERROR",
+      "attempt": 2
+    }
+  ],
+  "per_platform": {
+    "Klik Indomaret": {
+      "verdicts": [
+        "OPEN_NO_PRODUCT_DATA",
+        "OPEN_NO_PRODUCT_DATA"
+      ],
+      "cloudflare": true,
+      "verdict": "OPEN_NO_PRODUCT_DATA",
+      "distinct": [
+        "OPEN_NO_PRODUCT_DATA"
+      ]
+    },
+    "Blibli": {
+      "verdicts": [
+        "REFUSED_403",
+        "REFUSED_403"
+      ],
+      "cloudflare": true,
+      "verdict": "REFUSED_403",
+      "distinct": [
+        "REFUSED_403"
+      ]
+    },
+    "Tokopedia": {
+      "verdicts": [
+        "CONNECTION_ERROR",
+        "CONNECTION_ERROR"
+      ],
+      "cloudflare": false,
+      "verdict": "CONNECTION_ERROR",
+      "distinct": [
+        "CONNECTION_ERROR"
+      ]
+    }
+  }
+}

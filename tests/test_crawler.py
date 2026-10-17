@@ -164,11 +164,30 @@ def test_exit_codes():
 
 
 # ---- jalur CLI
-def test_contact_required_for_live_mode(monkeypatch, caplog):
-    monkeypatch.delenv("CRAWLER_CONTACT", raising=False)
-    monkeypatch.setattr("sys.argv", ["crawler.py"])
+REAL_CONFIG = str(Path(__file__).resolve().parent.parent / "config" / "selectors.yml")
+
+
+def _without_contact(monkeypatch):
+    monkeypatch.setenv("CRAWLER_CONTACT", "x")      # trik: dicatat agar dipulihkan setelah tes
+    monkeypatch.delenv("CRAWLER_CONTACT")
+
+
+def test_contact_required_for_live_mode(monkeypatch, tmp_path, caplog):
+    _without_contact(monkeypatch)
+    monkeypatch.setattr(crawler, "ROOT", tmp_path)            # tanpa .env
+    monkeypatch.setattr("sys.argv", ["crawler.py", "--config", REAL_CONFIG])
     assert crawler.main() == 1
     assert any(e["event"] == "contact_required" for e in events(caplog))
+
+
+def test_contact_is_read_from_dotenv(monkeypatch, tmp_path, caplog):
+    _without_contact(monkeypatch)
+    (tmp_path / ".env").write_text("CRAWLER_CONTACT=dari-dotenv@example.com\n", encoding="utf-8")
+    monkeypatch.setattr(crawler, "ROOT", tmp_path)
+    monkeypatch.setattr("sys.argv", ["crawler.py", "--config", REAL_CONFIG, "--platform", "TidakAda",
+                                     "--output-dir", str(tmp_path / "out")])
+    crawler.main()
+    assert not any(e["event"] == "contact_required" for e in events(caplog))
 
 
 def test_offline_from_html_mode(monkeypatch, tmp_path, caplog):

@@ -1,0 +1,60 @@
+digraph L {
+rankdir=LR;fontname="Helvetica";nodesep=0.25;ranksep=0.9;bgcolor="white";
+node [shape=box,style="rounded,filled",fontname="Helvetica",fontsize=10,color="#455a64"];
+edge [color="#78909c"];
+subgraph cluster_gold {label="gold";style="rounded,dashed";color="#90a4ae";fontsize=11;
+"model.price_analytics.dim_platform" [label="dim_platform",fillcolor="#fff8e1"];
+"model.price_analytics.fct_product_price_daily" [label="fct_product_price_daily",fillcolor="#fff8e1"];
+"model.price_analytics.dim_product_master" [label="dim_product_master",fillcolor="#fff8e1"];
+"model.price_analytics.dim_platform_listing" [label="dim_platform_listing",fillcolor="#fff8e1"];
+"model.price_analytics.fct_price_recommendation" [label="fct_price_recommendation",fillcolor="#fff8e1"];
+"model.price_analytics.dim_date" [label="dim_date",fillcolor="#fff8e1"];
+}
+subgraph cluster_report {label="gold / reporting (untuk dashboard)";style="rounded,dashed";color="#90a4ae";fontsize=11;
+"model.price_analytics.rpt_pipeline_summary" [label="rpt_pipeline_summary",fillcolor="#e8f5e9"];
+"model.price_analytics.rpt_recommendation_vs_competitors" [label="rpt_recommendation_vs_competitors",fillcolor="#e8f5e9"];
+"model.price_analytics.rpt_price_comparison" [label="rpt_price_comparison",fillcolor="#e8f5e9"];
+"model.price_analytics.rpt_pipeline_health" [label="rpt_pipeline_health",fillcolor="#e8f5e9"];
+"model.price_analytics.rpt_discount_trend_daily" [label="rpt_discount_trend_daily",fillcolor="#e8f5e9"];
+"model.price_analytics.rpt_price_history_by_product" [label="rpt_price_history_by_product",fillcolor="#e8f5e9"];
+}
+subgraph cluster_silver {label="silver";style="rounded,dashed";color="#90a4ae";fontsize=11;
+"model.price_analytics.stg_crawl_product_price" [label="stg_crawl_product_price",fillcolor="#eeeeee"];
+"model.price_analytics.silver_price_observation" [label="silver_price_observation",fillcolor="#eeeeee"];
+"model.price_analytics.silver_product_master" [label="silver_product_master",fillcolor="#eeeeee"];
+}
+subgraph cluster_seed {label="seed (data referensi)";style="rounded,dashed";color="#90a4ae";fontsize=11;
+"seed.price_analytics.category_map" [label="category_map",fillcolor="#e0f7fa"];
+"seed.price_analytics.platforms" [label="platforms",fillcolor="#e0f7fa"];
+"seed.price_analytics.brands" [label="brands",fillcolor="#e0f7fa"];
+}
+subgraph cluster_raw {label="raw (source)";style="rounded,dashed";color="#90a4ae";fontsize=11;
+"source.price_analytics.raw.crawl_product_price" [label="raw.crawl_product_price",fillcolor="#efebe9"];
+}
+"seed.price_analytics.platforms" -> "model.price_analytics.dim_platform";
+"model.price_analytics.silver_price_observation" -> "model.price_analytics.fct_product_price_daily";
+"model.price_analytics.silver_product_master" -> "model.price_analytics.dim_product_master";
+"model.price_analytics.silver_price_observation" -> "model.price_analytics.dim_platform_listing";
+"model.price_analytics.fct_product_price_daily" -> "model.price_analytics.rpt_pipeline_summary";
+"model.price_analytics.fct_price_recommendation" -> "model.price_analytics.rpt_pipeline_summary";
+"model.price_analytics.fct_price_recommendation" -> "model.price_analytics.rpt_recommendation_vs_competitors";
+"model.price_analytics.fct_product_price_daily" -> "model.price_analytics.rpt_recommendation_vs_competitors";
+"model.price_analytics.dim_platform" -> "model.price_analytics.rpt_recommendation_vs_competitors";
+"model.price_analytics.dim_product_master" -> "model.price_analytics.rpt_recommendation_vs_competitors";
+"model.price_analytics.dim_date" -> "model.price_analytics.rpt_recommendation_vs_competitors";
+"model.price_analytics.fct_product_price_daily" -> "model.price_analytics.rpt_price_comparison";
+"model.price_analytics.dim_product_master" -> "model.price_analytics.rpt_price_comparison";
+"model.price_analytics.dim_platform" -> "model.price_analytics.rpt_price_comparison";
+"model.price_analytics.fct_product_price_daily" -> "model.price_analytics.rpt_pipeline_health";
+"model.price_analytics.dim_platform" -> "model.price_analytics.rpt_pipeline_health";
+"model.price_analytics.fct_product_price_daily" -> "model.price_analytics.rpt_discount_trend_daily";
+"model.price_analytics.dim_platform" -> "model.price_analytics.rpt_discount_trend_daily";
+"model.price_analytics.fct_product_price_daily" -> "model.price_analytics.rpt_price_history_by_product";
+"model.price_analytics.dim_product_master" -> "model.price_analytics.rpt_price_history_by_product";
+"model.price_analytics.dim_platform" -> "model.price_analytics.rpt_price_history_by_product";
+"source.price_analytics.raw.crawl_product_price" -> "model.price_analytics.stg_crawl_product_price";
+"model.price_analytics.stg_crawl_product_price" -> "model.price_analytics.silver_price_observation";
+"seed.price_analytics.brands" -> "model.price_analytics.silver_price_observation";
+"seed.price_analytics.category_map" -> "model.price_analytics.silver_price_observation";
+"model.price_analytics.silver_price_observation" -> "model.price_analytics.silver_product_master";
+}
