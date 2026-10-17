@@ -1,0 +1,4 @@
+﻿
+{"ts": "2026-10-17T01:40:35+00:00", "level": "INFO", "event": "run_summary", "run_id": "20261017-084026", "lines": 3245, "valid": 3245, "rejected": 0, "parse_success_rate": 1.0, "inserted": 0, "duplicate_skipped": 3245, "flags": {"discount_out_of_range": 15, "price_not_positive": 10, "price_missing": 20}, "failed_files": [], "seconds": 8.98, "dry_run": false}
+
+
