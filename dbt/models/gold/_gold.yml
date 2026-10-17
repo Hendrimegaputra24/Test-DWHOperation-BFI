@@ -1,0 +1,122 @@
+version: 2
+
+models:
+  - name: dim_platform
+    description: Dimensi platform e-commerce sumber data. Satu baris per platform.
+    columns:
+      - name: platform_key
+        description: Kunci pengganti (hash dari nama platform).
+        data_tests: [unique, not_null]
+      - name: platform_name
+        data_tests: [unique, not_null]
+      - name: platform_type
+        description: retailer_online (toko online peritel) atau marketplace.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['retailer_online', 'marketplace']
+
+  - name: dim_date
+    description: Dimensi kalender harian (2026-2027). Satu baris per tanggal.
+    columns:
+      - name: date_key
+        description: Tanggal dalam format angka YYYYMMDD.
+        data_tests: [unique, not_null]
+      - name: day_of_week
+        description: Hari dalam minggu ISO (1 = Senin ... 7 = Minggu).
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5, 6, 7]
+                quote: false
+
+  - name: dim_product_master
+    description: >
+      Dimensi produk kanonik. Satu baris per produk unik lintas platform,
+      hasil pencocokan di layer silver.
+    columns:
+      - name: product_key
+        description: Kunci pengganti produk (hash dari match_key).
+        data_tests: [unique, not_null]
+      - name: product_name
+        data_tests: [not_null]
+      - name: brand
+        data_tests: [not_null]
+      - name: category
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Bumbu & Masakan', 'Minuman', 'Perawatan Rambut', 'Sabun Mandi', 'Perawatan Mulut', 'Deterjen & Pembersih']
+      - name: pack_size
+        description: Ukuran kemasan dalam satuan dasar, mis. "520 ml" atau "770 g".
+
+  - name: fct_product_price_daily
+    description: >
+      Tabel fakta harga harian. GRAIN: satu baris per produk, per platform, per tanggal crawl
+      (observasi valid terakhir pada hari itu). Baris bermasalah (harga kosong, nol, diskon di luar
+      rentang, harga lebih besar dari harga asli) tidak masuk ke tabel ini. Bersifat incremental
+      dengan lookback 3 hari.
+    columns:
+      - name: date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product_master')
+                field: product_key
+      - name: platform_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_platform')
+                field: platform_key
+      - name: price_idr
+        description: Harga jual dalam rupiah.
+        data_tests: [not_null]
+      - name: original_price_idr
+        description: Harga sebelum diskon. Sama dengan price_idr bila tidak ada diskon.
+        data_tests: [not_null]
+      - name: discount_pct
+        description: Diskon dalam persen, dihitung dari harga dan harga asli.
+      - name: is_discounted
+        data_tests: [not_null]
+      - name: data_source
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['live', 'synthetic']
+
+  - name: fct_price_recommendation
+    description: >
+      Tabel fakta rekomendasi harga. GRAIN: satu baris per produk, per tanggal rekomendasi,
+      per run model. Strukturnya dibuat oleh dbt, barisnya diisi oleh model batch rekomendasi
+      (Part 5) dan tidak dihapus oleh dbt run berikutnya.
+    columns:
+      - name: recommendation_key
+        description: Hash dari produk, tanggal, versi model, dan run_id.
+        data_tests: [unique]
+      - name: date_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: product_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_product_master')
+                field: product_key
+      - name: model_version
+        description: Versi aturan/model yang menghasilkan rekomendasi (untuk jejak audit).
+      - name: run_ts
+        description: Waktu run batch yang menghasilkan rekomendasi.
