@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: rpt_price_comparison
+    description: Matriks harga terakhir per produk di tiga platform, dengan selisih dan platform termurah. Untuk dashboard.
+    columns:
+      - name: product_name
+        data_tests: [unique, not_null]
+      - name: cheapest_platform
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Klik Indomaret', 'Blibli', 'Tokopedia']
+
+  - name: rpt_price_history_by_product
+    description: Riwayat harga harian per produk dan platform. Untuk grafik garis dengan filter produk.
+    columns:
+      - name: price_idr
+        data_tests: [not_null]
+
+  - name: rpt_discount_trend_daily
+    description: Tren diskon harian per platform (frekuensi dan kedalaman).
+    columns:
+      - name: discount_frequency_pct
+        data_tests: [not_null]
+
+  - name: rpt_recommendation_vs_competitors
+    description: Rekomendasi harga terbaru per produk dibandingkan harga kompetitor pada tanggal yang sama.
+    columns:
+      - name: product_name
+        data_tests: [unique]
+      - name: rule_applied
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['undercut_median', 'margin_floor']
+
+  - name: rpt_pipeline_health
+    description: Kesehatan data per platform (crawl terakhir, jumlah baris, status kesegaran).
+    columns:
+      - name: freshness_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['FRESH', 'WARN', 'STALE']
+
+  - name: rpt_pipeline_summary
+    description: Ringkasan kesehatan pipeline dalam satu baris.
+    columns:
+      - name: freshness_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['FRESH', 'WARN', 'STALE']

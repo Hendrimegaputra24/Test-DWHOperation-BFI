@@ -1,0 +1,60 @@
+# Konfigurasi crawler. Selector disimpan DI SINI (bukan di kode) agar bisa diperbaiki tanpa mengubah program.
+# Setiap field punya DAFTAR selector: dicoba berurutan, selector berikutnya adalah cadangan (fallback).
+#
+# PENTING: selector dan start_urls di bawah BELUM DIVERIFIKASI terhadap situs asli.
+# Ketiga situs menolak crawler pada pengujian (lihat docs/crawl_evidence). Isi start_urls dengan alamat
+# halaman toko resmi dari dokumen soal, lalu verifikasi selector dengan menyimpan halaman dari browser
+# dan menjalankan:  python src/crawler.py --from-html Tokopedia=halaman_tersimpan.html
+
+defaults:
+  min_delay_seconds: 3        # jeda minimal antar permintaan ke situs yang sama
+  max_pages: 3                # batas halaman per platform
+  parse_success_threshold: 0.90   # di bawah ini = alert dan crawler keluar dengan kode 1
+  request_timeout_seconds: 20
+
+platforms:
+  Klik Indomaret:
+    enabled: true
+    renderer: requests         # requests = HTML biasa; playwright = halaman yang dirender JavaScript
+    start_urls: []             # ISI dari dokumen soal (toko resmi Unilever)
+    selectors:
+      card: ["div.product-card", "div[class*='product']", "li[class*='product']"]
+      name: ["[class*='product-name']", "[class*='title']", "h3", "h2"]
+      price: ["[class*='price-now']", "[class*='price']", "[class*='harga']"]
+      original_price: ["[class*='price-old']", "[class*='original']", "del", "s"]
+      discount: ["[class*='discount']", "[class*='percent']", "[class*='diskon']"]
+      link: ["a[href]"]
+      detail: ["[class*='desc']"]
+      breadcrumb: ["[class*='breadcrumb']"]
+    json_ld_fallback: true
+
+  Blibli:
+    enabled: true
+    renderer: playwright
+    start_urls: []             # ISI dari dokumen soal
+    selectors:
+      card: ["div[class*='product-card']", "div[class*='product-list'] > div", "div[class*='product']"]
+      name: ["[class*='product-name']", "[class*='title']", "h3", "h2"]
+      price: ["[class*='final-price']", "[class*='price']"]
+      original_price: ["[class*='original-price']", "[class*='strike']", "del", "s"]
+      discount: ["[class*='discount']", "[class*='percent']"]
+      link: ["a[href]"]
+      detail: ["[class*='desc']"]
+      breadcrumb: ["[class*='breadcrumb']"]
+    json_ld_fallback: true
+
+  Tokopedia:
+    enabled: true
+    renderer: playwright
+    start_urls: []             # ISI dari dokumen soal
+    selectors:
+      # Dua selector pertama berasal dari skrip lama pengguna (belum terverifikasi).
+      card: ["[data-testid='master-product-card']", "div[class*='prd_container']", "div[class*='product']"]
+      name: ["[data-testid='spnSRPProdName']", "[class*='prd_link-product-name']", "[class*='product-name']", "h3"]
+      price: ["[data-testid='spnSRPProdPrice']", "[class*='prd_link-product-price']", "[class*='price']"]
+      original_price: ["[data-testid='lblProductSlashPrice']", "[class*='slash']", "del", "s"]
+      discount: ["[data-testid='lblProductDiscount']", "[class*='discount']"]
+      link: ["a[href]"]
+      detail: ["[class*='desc']"]
+      breadcrumb: ["[class*='breadcrumb']"]
+    json_ld_fallback: true

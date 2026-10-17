@@ -74,7 +74,7 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['Bumbu & Masakan', 'Minuman', 'Perawatan Rambut', 'Sabun Mandi', 'Perawatan Mulut', 'Deterjen & Pembersih']
+                values: ['Bumbu & Masakan', 'Minuman', 'Perawatan Rambut', 'Sabun Mandi', 'Perawatan Mulut', 'Deterjen & Pembersih', 'Tidak terklasifikasi']
       - name: n_platforms
         description: Jumlah platform tempat produk ini ditemukan.
         data_tests:

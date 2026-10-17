@@ -19,8 +19,9 @@ agg as (
     select
         product_key,
         max(match_key)                         as match_key,
-        max(brand)                             as brand,
-        max(category_from_breadcrumb)          as category,
+        -- produk yang belum bisa dikenali tetap masuk dengan label netral (bukan membuat pipeline gagal)
+        coalesce(max(brand), 'Tidak diketahui')                       as brand,
+        coalesce(max(category_from_breadcrumb), 'Tidak terklasifikasi') as category,
         max(pack_qty_base)                     as pack_qty_base,
         max(pack_unit_base)                    as pack_unit_base,
         count(distinct platform)               as n_platforms,

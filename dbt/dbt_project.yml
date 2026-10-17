@@ -19,6 +19,8 @@ models:
     gold:
       +schema: gold
       +materialized: table
+      reporting:
+        +materialized: view
 
 seeds:
   price_analytics:

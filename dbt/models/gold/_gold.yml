@@ -47,7 +47,7 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['Bumbu & Masakan', 'Minuman', 'Perawatan Rambut', 'Sabun Mandi', 'Perawatan Mulut', 'Deterjen & Pembersih']
+                values: ['Bumbu & Masakan', 'Minuman', 'Perawatan Rambut', 'Sabun Mandi', 'Perawatan Mulut', 'Deterjen & Pembersih', 'Tidak terklasifikasi']
       - name: pack_size
         description: Ukuran kemasan dalam satuan dasar, mis. "520 ml" atau "770 g".
 
