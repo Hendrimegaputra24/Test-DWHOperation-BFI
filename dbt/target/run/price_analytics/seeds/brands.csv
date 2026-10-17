@@ -1,0 +1,14 @@
+
+    
+    
+    
+    create table "price_analytics"."silver"."brands" ("brand" text)
+  ;
+    -- dbt seed --
+    
+          insert into "price_analytics"."silver"."brands" ("brand") values
+          (%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s)
+      
+
+;
+  

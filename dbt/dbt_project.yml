@@ -1,0 +1,25 @@
+name: price_analytics
+version: "1.0.0"
+config-version: 2
+profile: price_analytics
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  price_analytics:
+    silver:
+      +schema: silver
+      +materialized: view
+    gold:
+      +schema: gold
+      +materialized: table
+
+seeds:
+  price_analytics:
+    +schema: silver

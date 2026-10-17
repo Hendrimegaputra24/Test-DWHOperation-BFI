@@ -1,0 +1,45 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Data hasil crawl yang mendarat apa adanya (append-only), tanpa logika bisnis.
+      Diisi oleh loader Python (src/load_raw.py).
+    schema: raw
+    config:
+      loaded_at_field: crawled_at
+      freshness:
+        warn_after: {count: 36, period: hour}
+        error_after: {count: 72, period: hour}
+
+    tables:
+      - name: crawl_product_price
+        description: >
+          Satu baris = satu hasil crawl sebuah produk di satu platform pada satu waktu.
+          Harga dan diskon masih berupa teks mentah (mis. "Rp 12.500").
+        columns:
+          - name: raw_id
+            description: Kunci surrogate otomatis, hanya untuk identitas baris di raw.
+            data_tests: [unique, not_null]
+          - name: platform
+            description: Nama platform sumber.
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['Klik Indomaret', 'Blibli', 'Tokopedia']
+          - name: source_url
+            description: Alamat sumber produk (untuk data sintetis berformat synthetic://...).
+            data_tests: [not_null]
+          - name: crawled_at
+            description: Waktu crawl (zona waktu disertakan). Dasar pengecekan freshness.
+            data_tests: [not_null]
+          - name: payload_hash
+            description: SHA-256 isi hasil crawl tanpa crawled_at; dasar idempotency.
+            data_tests: [not_null]
+          - name: data_source
+            description: live = hasil crawl asli, synthetic = dataset sampel buatan.
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: ['live', 'synthetic']

@@ -1,0 +1,2034 @@
+[0m09:42:23.992064 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022F84774590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022F86E8A840>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022F8775C740>]}
+
+
+============================== 09:42:24.006910 | bebee971-0378-4f63-bce1-492beca2761d ==============================
+[0m09:42:24.006910 [info ] [MainThread]: Running with dbt=1.12.6
+[0m09:42:24.020028 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'version_check': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'D:\\BFI\\App\\price-analytics\\dbt', 'invocation_command': 'dbt debug', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'D:\\BFI\\App\\price-analytics\\dbt\\logs'}
+[0m09:42:24.155170 [info ] [MainThread]: dbt version: 1.12.6
+[0m09:42:24.170228 [info ] [MainThread]: python version: 3.12.3
+[0m09:42:24.185179 [info ] [MainThread]: python path: D:\BFI\APP\price-analytics\.venv\Scripts\python.exe
+[0m09:42:24.190806 [info ] [MainThread]: os info: Windows-11-10.0.26200-SP0
+[0m09:42:24.645678 [info ] [MainThread]: Using profiles dir at D:\BFI\App\price-analytics\dbt
+[0m09:42:24.651190 [info ] [MainThread]: Using profiles.yml file at D:\BFI\App\price-analytics\dbt\profiles.yml
+[0m09:42:24.663024 [info ] [MainThread]: Using dbt_project.yml file at D:\BFI\App\price-analytics\dbt\dbt_project.yml
+[0m09:42:24.670970 [info ] [MainThread]: adapter type: postgres
+[0m09:42:24.684233 [info ] [MainThread]: adapter version: 1.11.0
+[0m09:42:25.240937 [info ] [MainThread]: Configuration:
+[0m09:42:25.245498 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m09:42:25.251103 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m09:42:25.255092 [info ] [MainThread]: Required dependencies:
+[0m09:42:25.258706 [debug] [MainThread]: Executing "git --help"
+[0m09:42:25.565036 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   history    EXPERIMENTAL: Rewrite history\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m09:42:25.568465 [debug] [MainThread]: STDERR: "b''"
+[0m09:42:25.572996 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m09:42:25.577020 [info ] [MainThread]: Connection:
+[0m09:42:25.583706 [info ] [MainThread]:   host: localhost
+[0m09:42:25.585721 [info ] [MainThread]:   port: 5433
+[0m09:42:25.591303 [info ] [MainThread]:   user: pricer
+[0m09:42:25.594318 [info ] [MainThread]:   database: price_analytics
+[0m09:42:25.600562 [info ] [MainThread]:   schema: public
+[0m09:42:25.604044 [info ] [MainThread]:   connect_timeout: 10
+[0m09:42:25.608424 [info ] [MainThread]:   role: None
+[0m09:42:25.615571 [info ] [MainThread]:   search_path: None
+[0m09:42:25.620575 [info ] [MainThread]:   keepalives_idle: 0
+[0m09:42:25.623915 [info ] [MainThread]:   sslmode: None
+[0m09:42:25.634521 [info ] [MainThread]:   sslcert: None
+[0m09:42:25.644938 [info ] [MainThread]:   sslkey: None
+[0m09:42:25.649358 [info ] [MainThread]:   sslrootcert: None
+[0m09:42:25.659437 [info ] [MainThread]:   application_name: dbt
+[0m09:42:25.662914 [info ] [MainThread]:   autocommit: False
+[0m09:42:25.666193 [info ] [MainThread]:   retries: 1
+[0m09:42:25.670253 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m09:42:27.109759 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m09:42:27.595260 [debug] [MainThread]: Using postgres connection "debug"
+[0m09:42:27.597394 [debug] [MainThread]: On debug: select 1 as id
+[0m09:42:27.600966 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:42:27.729045 [debug] [MainThread]: SQL status: SELECT 1 in 0.129 seconds
+[0m09:42:27.735213 [debug] [MainThread]: On debug: Close
+[0m09:42:27.740394 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m09:42:27.745529 [info ] [MainThread]: [32mAll checks passed![0m
+[0m09:42:27.750679 [debug] [MainThread]: Command `dbt debug` succeeded at 09:42:27.750102 after 4.67 seconds
+[0m09:42:27.754497 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m09:42:27.757569 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022F894AA660>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022F896C8200>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022F87403680>]}
+[0m09:42:27.761659 [debug] [MainThread]: Flushing usage events
+[0m09:42:30.075592 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:43:15.732815 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E32BB7D8E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E32E35A720>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E3301F8B30>]}
+
+
+============================== 09:43:15.749265 | 2f4d1b5e-d09f-4fc8-baca-20da9091187b ==============================
+[0m09:43:15.749265 [info ] [MainThread]: Running with dbt=1.12.6
+[0m09:43:15.754699 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'D:\\BFI\\App\\price-analytics\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'invocation_command': 'dbt run', 'log_path': 'D:\\BFI\\App\\price-analytics\\dbt\\logs'}
+[0m09:43:16.806818 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E3302E2570>]}
+[0m09:43:17.168046 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E32D8019A0>]}
+[0m09:43:17.175108 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m09:43:18.876973 [debug] [MainThread]: checksum: 5b93adbd3580c1a73026bdff4cf0855598b83c4d0e91ce5219a7082e6123b6f7, vars: {}, profile: price_analytics, target: dev, version: 1.12.6
+[0m09:43:18.885291 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m09:43:18.890265 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E330A3C140>]}
+[0m09:43:28.822567 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.price_analytics.gold
+[0m09:43:28.851466 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E3312D4B60>]}
+[0m09:43:29.605463 [debug] [MainThread]: Wrote artifact WritableManifest to D:\BFI\App\price-analytics\dbt\target\manifest.json
+[0m09:43:29.625723 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\BFI\App\price-analytics\dbt\target\semantic_manifest.json
+[0m09:43:29.760489 [debug] [MainThread]: Wrote artifact OsiDocument to D:\BFI\App\price-analytics\dbt\target\osi_document.json
+[0m09:43:29.924011 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E330F9A960>]}
+[0m09:43:29.928526 [info ] [MainThread]: Found 3 models, 26 data tests, 2 seeds, 1 source, 478 macros
+[0m09:43:29.934272 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E3312D4680>]}
+[0m09:43:29.950019 [info ] [MainThread]: 
+[0m09:43:29.956932 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m09:43:29.964626 [info ] [MainThread]: 
+[0m09:43:29.973810 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m09:43:30.026457 [debug] [ThreadPool]: Acquiring new postgres connection 'list_price_analytics'
+[0m09:43:30.666912 [debug] [ThreadPool]: Using postgres connection "list_price_analytics"
+[0m09:43:30.673995 [debug] [ThreadPool]: On list_price_analytics: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "list_price_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m09:43:30.677066 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m09:43:30.906917 [debug] [ThreadPool]: SQL status: SELECT 5 in 0.230 seconds
+[0m09:43:30.914960 [debug] [ThreadPool]: On list_price_analytics: Close
+[0m09:43:30.920749 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_price_analytics, now create_price_analytics_silver)
+[0m09:43:30.924908 [debug] [ThreadPool]: Creating schema "database: "price_analytics"
+schema: "silver"
+"
+[0m09:43:30.943897 [debug] [ThreadPool]: Using postgres connection "create_price_analytics_silver"
+[0m09:43:30.946827 [debug] [ThreadPool]: On create_price_analytics_silver: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "create_price_analytics_silver"} */
+create schema if not exists "silver"
+[0m09:43:30.948866 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m09:43:31.082664 [debug] [ThreadPool]: SQL status: CREATE SCHEMA in 0.134 seconds
+[0m09:43:31.094559 [debug] [ThreadPool]: On create_price_analytics_silver: COMMIT
+[0m09:43:31.100326 [debug] [ThreadPool]: Using postgres connection "create_price_analytics_silver"
+[0m09:43:31.106718 [debug] [ThreadPool]: On create_price_analytics_silver: COMMIT
+[0m09:43:31.123321 [debug] [ThreadPool]: SQL status: COMMIT in 0.009 seconds
+[0m09:43:31.130437 [debug] [ThreadPool]: On create_price_analytics_silver: Close
+[0m09:43:31.147079 [debug] [ThreadPool]: Acquiring new postgres connection 'list_price_analytics_silver'
+[0m09:43:31.180021 [debug] [ThreadPool]: Using postgres connection "list_price_analytics_silver"
+[0m09:43:31.190360 [debug] [ThreadPool]: On list_price_analytics_silver: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "list_price_analytics_silver"} */
+select
+      'price_analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'silver'
+    union all
+    select
+      'price_analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'silver'
+    union all
+    select
+      'price_analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'silver'
+    union all
+    select distinct
+     'price_analytics' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'silver'
+  
+[0m09:43:31.193829 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m09:43:31.568865 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.375 seconds
+[0m09:43:31.581085 [debug] [ThreadPool]: On list_price_analytics_silver: ROLLBACK
+[0m09:43:31.588260 [debug] [ThreadPool]: On list_price_analytics_silver: Close
+[0m09:43:31.612160 [debug] [MainThread]: Using postgres connection "master"
+[0m09:43:31.617741 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m09:43:31.623853 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:43:31.836025 [debug] [MainThread]: SQL status: SELECT 0 in 0.212 seconds
+[0m09:43:31.848402 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E3311409E0>]}
+[0m09:43:31.853005 [debug] [MainThread]: On master: ROLLBACK
+[0m09:43:31.866138 [debug] [MainThread]: On master: COMMIT
+[0m09:43:31.871377 [debug] [MainThread]: Using postgres connection "master"
+[0m09:43:31.876764 [debug] [MainThread]: On master: COMMIT
+[0m09:43:31.891474 [debug] [MainThread]: SQL status: COMMIT in 0.009 seconds
+[0m09:43:31.894613 [debug] [MainThread]: On master: Close
+[0m09:43:31.962344 [debug] [Thread-1 (]: Began running node model.price_analytics.stg_crawl_product_price
+[0m09:43:31.967249 [info ] [Thread-1 (]: 1 of 3 START sql view model silver.stg_crawl_product_price ..................... [RUN]
+[0m09:43:31.971829 [debug] [Thread-1 (]: Acquiring new postgres connection 'model.price_analytics.stg_crawl_product_price'
+[0m09:43:31.975363 [debug] [Thread-1 (]: Began compiling node model.price_analytics.stg_crawl_product_price
+[0m09:43:32.013730 [debug] [Thread-1 (]: Writing injected SQL for node "model.price_analytics.stg_crawl_product_price"
+[0m09:43:32.022852 [debug] [Thread-1 (]: Began executing node model.price_analytics.stg_crawl_product_price
+[0m09:43:32.211740 [debug] [Thread-1 (]: Writing runtime sql for node "model.price_analytics.stg_crawl_product_price"
+[0m09:43:32.221617 [debug] [Thread-1 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m09:43:32.225706 [debug] [Thread-1 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+
+  create view "price_analytics"."silver"."stg_crawl_product_price__dbt_tmp"
+    
+    
+  as (
+    with src as (
+    select * from "price_analytics"."raw"."crawl_product_price"
+),
+
+parsed as (
+    select
+        raw_id,
+        platform,
+        source_url,
+        crawled_at,
+        crawl_date,
+        crawler_version,
+        data_source,
+        product_name,
+        breadcrumb,
+        -- "Rp 14.500" / "Rp14.500" -> 14500
+        nullif(regexp_replace(price_text, '[^0-9]', '', 'g'), '')::numeric          as price_idr,
+        nullif(regexp_replace(original_price_text, '[^0-9]', '', 'g'), '')::numeric as original_price_idr,
+        -- "9%" -> 9 ; "-10%" -> -10 (nilai di luar 0..100 dibiarkan agar bisa ditandai)
+        nullif(substring(discount_text from '-?[0-9]+'), '')::numeric               as discount_pct_raw,
+        lower(product_name)                                                         as name_lower,
+        regexp_match(lower(product_name), '(\d+(?:[.,]\d+)?)\s*(ml|kg|g|l|pcs)(?![a-z])')                           as size_m
+    from src
+),
+
+sized as (
+    select
+        *,
+        replace(size_m[1], ',', '.')::numeric as size_qty,
+        size_m[2]                             as size_unit
+    from parsed
+),
+
+normalized as (
+    select
+        *,
+        -- satuan dasar: ml (dari ml, L), g (dari g, kg), pcs
+        round(case size_unit when 'l' then size_qty * 1000
+                             when 'kg' then size_qty * 1000
+                             else size_qty end)::int as pack_qty_base,
+        case size_unit when 'l' then 'ml' when 'ml' then 'ml'
+                       when 'kg' then 'g' when 'g' then 'g'
+                       when 'pcs' then 'pcs' end      as pack_unit_base,
+        -- nama tanpa ukuran, tanpa tanda baca
+        trim(regexp_replace(regexp_replace(name_lower, '(\d+(?:[.,]\d+)?)\s*(ml|kg|g|l|pcs)(?![a-z])', ' '), '[^a-z0-9]+', ' ', 'g')) as name_clean
+    from sized
+),
+
+keyed as (
+    select
+        n.*,
+        -- kumpulan kata unik (tanpa kata promosi), diurutkan, sehingga urutan kata tidak berpengaruh
+        (select string_agg(distinct t, ' ' order by t)
+           from unnest(string_to_array(n.name_clean, ' ')) as t
+          where t <> ''
+            and t not in ('official', 'store', 'isi', 'lebih', 'promo', 'pack', 'unilever')) as name_key
+    from normalized n
+)
+
+select
+    raw_id, platform, source_url, crawled_at, crawl_date, crawler_version, data_source,
+    product_name, breadcrumb, price_idr, original_price_idr, discount_pct_raw,
+    pack_qty_base, pack_unit_base, name_clean, name_key,
+    name_key || '|' || coalesce(pack_qty_base::text, 'na') || coalesce(pack_unit_base, 'na') as match_key
+from keyed
+  );
+[0m09:43:32.229764 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m09:43:32.400528 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.170 seconds
+[0m09:43:32.426387 [debug] [Thread-1 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m09:43:32.430354 [debug] [Thread-1 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+alter table "price_analytics"."silver"."stg_crawl_product_price__dbt_tmp" rename to "stg_crawl_product_price"
+[0m09:43:32.454543 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.020 seconds
+[0m09:43:32.586547 [debug] [Thread-1 (]: On model.price_analytics.stg_crawl_product_price: COMMIT
+[0m09:43:32.600962 [debug] [Thread-1 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m09:43:32.612254 [debug] [Thread-1 (]: On model.price_analytics.stg_crawl_product_price: COMMIT
+[0m09:43:32.646393 [debug] [Thread-1 (]: SQL status: COMMIT in 0.029 seconds
+[0m09:43:32.682208 [debug] [Thread-1 (]: Applying DROP to: "price_analytics"."silver"."stg_crawl_product_price__dbt_backup"
+[0m09:43:32.720504 [debug] [Thread-1 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m09:43:32.725554 [debug] [Thread-1 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+drop view if exists "price_analytics"."silver"."stg_crawl_product_price__dbt_backup" cascade
+[0m09:43:32.745143 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.016 seconds
+[0m09:43:32.759416 [debug] [Thread-1 (]: On model.price_analytics.stg_crawl_product_price: Close
+[0m09:43:32.781913 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E32BC7DB20>]}
+[0m09:43:32.787139 [info ] [Thread-1 (]: 1 of 3 OK created sql view model silver.stg_crawl_product_price ................ [[32mCREATE VIEW[0m in 0.80s]
+[0m09:43:32.792756 [debug] [Thread-1 (]: Finished running node model.price_analytics.stg_crawl_product_price
+[0m09:43:32.798368 [debug] [Thread-3 (]: Began running node model.price_analytics.silver_price_observation
+[0m09:43:32.801955 [info ] [Thread-3 (]: 2 of 3 START sql view model silver.silver_price_observation .................... [RUN]
+[0m09:43:32.824860 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.price_analytics.silver_price_observation'
+[0m09:43:32.833877 [debug] [Thread-3 (]: Began compiling node model.price_analytics.silver_price_observation
+[0m09:43:32.850189 [debug] [Thread-3 (]: Writing injected SQL for node "model.price_analytics.silver_price_observation"
+[0m09:43:32.863285 [debug] [Thread-3 (]: Began executing node model.price_analytics.silver_price_observation
+[0m09:43:32.878645 [debug] [Thread-3 (]: Writing runtime sql for node "model.price_analytics.silver_price_observation"
+[0m09:43:32.886019 [debug] [Thread-3 (]: Using postgres connection "model.price_analytics.silver_price_observation"
+[0m09:43:32.891755 [debug] [Thread-3 (]: On model.price_analytics.silver_price_observation: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_price_observation"} */
+
+  create view "price_analytics"."silver"."silver_price_observation__dbt_tmp"
+    
+    
+  as (
+    with ranked as (
+    select
+        s.*,
+        row_number() over (
+            partition by platform, source_url, crawl_date
+            order by crawled_at desc, raw_id desc
+        ) as rn
+    from "price_analytics"."silver"."stg_crawl_product_price" s
+),
+
+latest as (
+    select * from ranked where rn = 1
+),
+
+branded as (
+    select
+        l.*,
+        (select b.brand from "price_analytics"."silver"."brands" b
+          where ' ' || l.name_clean || ' ' like '% ' || lower(b.brand) || ' %'
+          order by length(b.brand) desc limit 1) as brand,
+        c.category as category_from_breadcrumb
+    from latest l
+    left join "price_analytics"."silver"."category_map" c
+           on c.platform = l.platform and c.breadcrumb = l.breadcrumb
+),
+
+checked as (
+    select
+        *,
+        case
+            when price_idr is null                                         then 'price_missing'
+            when price_idr <= 0                                            then 'price_not_positive'
+            when discount_pct_raw is not null
+                 and (discount_pct_raw < 0 or discount_pct_raw > 100)      then 'discount_out_of_range'
+            when original_price_idr is not null
+                 and price_idr > original_price_idr                        then 'price_gt_original'
+        end as dq_issue
+    from branded
+)
+
+select
+    md5(platform || '|' || source_url)                         as listing_key,
+    md5(match_key)                                             as product_key,
+    platform,
+    source_url,
+    crawl_date,
+    crawled_at,
+    product_name,
+    brand,
+    category_from_breadcrumb,
+    pack_qty_base,
+    pack_unit_base,
+    match_key,
+    price_idr,
+    coalesce(original_price_idr, price_idr)                    as original_price_idr,
+    case when price_idr > 0 and coalesce(original_price_idr, price_idr) >= price_idr
+         then round((1 - price_idr / coalesce(original_price_idr, price_idr)) * 100, 1)
+         else 0 end                                            as discount_pct,
+    dq_issue,
+    (dq_issue is null)                                         as is_valid,
+    data_source,
+    raw_id
+from checked
+  );
+[0m09:43:32.895803 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m09:43:33.021144 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "silver.category_map" does not exist
+LINE 29:     left join "price_analytics"."silver"."category_map" c
+                       ^
+
+[0m09:43:33.025538 [debug] [Thread-3 (]: On model.price_analytics.silver_price_observation: ROLLBACK
+[0m09:43:33.045789 [debug] [Thread-3 (]: On model.price_analytics.silver_price_observation: Close
+[0m09:43:33.077179 [debug] [Thread-3 (]: Database Error in model silver_price_observation (models\silver\silver_price_observation.sql)
+  relation "silver.category_map" does not exist
+  LINE 29:     left join "price_analytics"."silver"."category_map" c
+                         ^
+  compiled code at target\run\price_analytics\models\silver\silver_price_observation.sql
+[0m09:43:33.085682 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '2f4d1b5e-d09f-4fc8-baca-20da9091187b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E332684CE0>]}
+[0m09:43:33.096730 [error] [Thread-3 (]: 2 of 3 ERROR creating sql view model silver.silver_price_observation ........... [[31mERROR[0m in 0.26s]
+[0m09:43:33.110281 [debug] [Thread-3 (]: Finished running node model.price_analytics.silver_price_observation
+[0m09:43:33.114749 [debug] [Thread-7 (]: Marking all children of 'model.price_analytics.silver_price_observation' to be skipped because of status 'error'.  Reason: Database Error in model silver_price_observation (models\silver\silver_price_observation.sql)
+  relation "silver.category_map" does not exist
+  LINE 29:     left join "price_analytics"."silver"."category_map" c
+                         ^
+  compiled code at target\run\price_analytics\models\silver\silver_price_observation.sql.
+[0m09:43:33.127800 [debug] [Thread-2 (]: Began running node model.price_analytics.silver_product_master
+[0m09:43:33.133183 [info ] [Thread-2 (]: 3 of 3 SKIP relation silver.silver_product_master .............................. [[33mSKIP[0m]
+[0m09:43:33.151446 [debug] [Thread-2 (]: Finished running node model.price_analytics.silver_product_master
+[0m09:43:33.164264 [debug] [MainThread]: On master: COMMIT
+[0m09:43:33.184454 [debug] [MainThread]: Using postgres connection "master"
+[0m09:43:33.198397 [debug] [MainThread]: On master: COMMIT
+[0m09:43:33.203043 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m09:43:33.313024 [debug] [MainThread]: SQL status: COMMIT in 0.110 seconds
+[0m09:43:33.317071 [debug] [MainThread]: On master: Close
+[0m09:43:33.325302 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m09:43:33.330009 [debug] [MainThread]: Connection 'create_price_analytics_silver' was properly closed.
+[0m09:43:33.333428 [debug] [MainThread]: Connection 'list_price_analytics_silver' was properly closed.
+[0m09:43:33.343894 [debug] [MainThread]: Connection 'model.price_analytics.stg_crawl_product_price' was properly closed.
+[0m09:43:33.347431 [debug] [MainThread]: Connection 'model.price_analytics.silver_price_observation' was properly closed.
+[0m09:43:33.351386 [info ] [MainThread]: 
+[0m09:43:33.357046 [info ] [MainThread]: Finished running 3 view models in 0 hours 0 minutes and 3.38 seconds (3.38s).
+[0m09:43:33.365642 [debug] [MainThread]: Command end result
+[0m09:43:33.615452 [debug] [MainThread]: Wrote artifact WritableManifest to D:\BFI\App\price-analytics\dbt\target\manifest.json
+[0m09:43:33.645205 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\BFI\App\price-analytics\dbt\target\semantic_manifest.json
+[0m09:43:33.665814 [debug] [MainThread]: Wrote artifact OsiDocument to D:\BFI\App\price-analytics\dbt\target\osi_document.json
+[0m09:43:33.696473 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\BFI\App\price-analytics\dbt\target\run_results.json
+[0m09:43:33.699276 [info ] [MainThread]: 
+[0m09:43:33.703212 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m09:43:33.706066 [info ] [MainThread]: 
+[0m09:43:33.708831 [error] [MainThread]: [[31mERROR[0m]: in model silver_price_observation (models\silver\silver_price_observation.sql)
+[0m09:43:33.711701 [error] [MainThread]:   Database Error in model silver_price_observation (models\silver\silver_price_observation.sql)
+  relation "silver.category_map" does not exist
+  LINE 29:     left join "price_analytics"."silver"."category_map" c
+                         ^
+  compiled code at target\run\price_analytics\models\silver\silver_price_observation.sql
+[0m09:43:33.712267 [info ] [MainThread]: 
+[0m09:43:33.715830 [info ] [MainThread]:   compiled code at target\compiled\price_analytics\models\silver\silver_price_observation.sql
+[0m09:43:33.719838 [info ] [MainThread]: 
+[0m09:43:33.722253 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=1 SKIP=1 NO-OP=0 REUSED=0 TOTAL=3
+[0m09:43:33.729409 [debug] [MainThread]: Command `dbt run` failed at 09:43:33.729409 after 18.93 seconds
+[0m09:43:33.734176 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E3301DAAE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E331276DB0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E32E1F0770>]}
+[0m09:43:33.736705 [debug] [MainThread]: Flushing usage events
+[0m09:43:35.975255 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:52:05.121570 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA50019100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA5001B5F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA50018BC0>]}
+
+
+============================== 12:52:05.143841 | 5f138e17-0de7-4e5a-a657-fb4ecae58e54 ==============================
+[0m12:52:05.143841 [info ] [MainThread]: Running with dbt=1.12.6
+[0m12:52:05.148333 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'invocation_command': 'dbt build --profiles-dir .', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'use_colors': 'True', 'log_path': 'D:\\BFI\\App\\price-analytics\\dbt\\logs'}
+[0m12:52:06.294435 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA501B4FE0>]}
+[0m12:52:06.695876 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA4BAEE9C0>]}
+[0m12:52:06.703097 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m12:52:08.751581 [debug] [MainThread]: checksum: 5b93adbd3580c1a73026bdff4cf0855598b83c4d0e91ce5219a7082e6123b6f7, vars: {}, profile: price_analytics, target: dev, version: 1.12.6
+[0m12:52:10.127526 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m12:52:10.136749 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m12:52:10.141781 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m12:52:10.203163 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.price_analytics.gold
+[0m12:52:10.256788 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA501B68A0>]}
+[0m12:52:11.590338 [debug] [MainThread]: Wrote artifact WritableManifest to D:\BFI\App\price-analytics\dbt\target\manifest.json
+[0m12:52:11.611875 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\BFI\App\price-analytics\dbt\target\semantic_manifest.json
+[0m12:52:11.797335 [debug] [MainThread]: Wrote artifact OsiDocument to D:\BFI\App\price-analytics\dbt\target\osi_document.json
+[0m12:52:12.145538 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA508453A0>]}
+[0m12:52:12.150352 [info ] [MainThread]: Found 3 models, 26 data tests, 2 seeds, 1 source, 478 macros
+[0m12:52:12.191770 [info ] [MainThread]: 
+[0m12:52:12.198872 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m12:52:12.203442 [info ] [MainThread]: 
+[0m12:52:12.208629 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m12:52:12.243261 [debug] [ThreadPool]: Acquiring new postgres connection 'list_price_analytics'
+[0m12:52:13.315636 [debug] [ThreadPool]: Using postgres connection "list_price_analytics"
+[0m12:52:13.322369 [debug] [ThreadPool]: On list_price_analytics: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "list_price_analytics"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m12:52:13.330577 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:52:13.587145 [debug] [ThreadPool]: SQL status: SELECT 6 in 0.256 seconds
+[0m12:52:13.595894 [debug] [ThreadPool]: On list_price_analytics: Close
+[0m12:52:13.610239 [debug] [ThreadPool]: Acquiring new postgres connection 'list_price_analytics_silver'
+[0m12:52:13.645051 [debug] [ThreadPool]: Using postgres connection "list_price_analytics_silver"
+[0m12:52:13.649721 [debug] [ThreadPool]: On list_price_analytics_silver: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "list_price_analytics_silver"} */
+select
+      'price_analytics' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'silver'
+    union all
+    select
+      'price_analytics' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'silver'
+    union all
+    select
+      'price_analytics' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'silver'
+    union all
+    select distinct
+     'price_analytics' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'silver'
+  
+[0m12:52:13.658132 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m12:52:13.772045 [debug] [ThreadPool]: SQL status: SELECT 1 in 0.114 seconds
+[0m12:52:13.781726 [debug] [ThreadPool]: On list_price_analytics_silver: ROLLBACK
+[0m12:52:13.788863 [debug] [ThreadPool]: On list_price_analytics_silver: Close
+[0m12:52:13.811625 [debug] [MainThread]: Using postgres connection "master"
+[0m12:52:13.815230 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m12:52:13.820362 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:52:13.974804 [debug] [MainThread]: SQL status: SELECT 1 in 0.155 seconds
+[0m12:52:13.986949 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA507A95E0>]}
+[0m12:52:14.000778 [debug] [MainThread]: On master: ROLLBACK
+[0m12:52:14.045756 [debug] [MainThread]: On master: COMMIT
+[0m12:52:14.053766 [debug] [MainThread]: Using postgres connection "master"
+[0m12:52:14.067921 [debug] [MainThread]: On master: COMMIT
+[0m12:52:14.095261 [debug] [MainThread]: SQL status: COMMIT in 0.022 seconds
+[0m12:52:14.098118 [debug] [MainThread]: On master: Close
+[0m12:52:14.211156 [debug] [Thread-1 (]: Began running node seed.price_analytics.brands
+[0m12:52:14.213488 [debug] [Thread-2 (]: Began running node seed.price_analytics.category_map
+[0m12:52:14.215065 [debug] [Thread-3 (]: Began running node test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8
+[0m12:52:14.217615 [debug] [Thread-4 (]: Began running node test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c
+[0m12:52:14.220715 [info ] [Thread-1 (]: 1 of 31 START seed file silver.brands .......................................... [RUN]
+[0m12:52:14.232230 [info ] [Thread-2 (]: 2 of 31 START seed file silver.category_map .................................... [RUN]
+[0m12:52:14.240115 [info ] [Thread-3 (]: 3 of 31 START test source_accepted_values_raw_crawl_product_price_data_source__live__synthetic  [RUN]
+[0m12:52:14.251577 [info ] [Thread-4 (]: 4 of 31 START test source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia  [RUN]
+[0m12:52:14.263103 [debug] [Thread-1 (]: Acquiring new postgres connection 'seed.price_analytics.brands'
+[0m12:52:14.266708 [debug] [Thread-2 (]: Acquiring new postgres connection 'seed.price_analytics.category_map'
+[0m12:52:14.271804 [debug] [Thread-3 (]: Acquiring new postgres connection 'test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8'
+[0m12:52:14.280524 [debug] [Thread-4 (]: Acquiring new postgres connection 'test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c'
+[0m12:52:14.289455 [debug] [Thread-1 (]: Began compiling node seed.price_analytics.brands
+[0m12:52:14.294042 [debug] [Thread-2 (]: Began compiling node seed.price_analytics.category_map
+[0m12:52:14.308347 [debug] [Thread-3 (]: Began compiling node test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8
+[0m12:52:14.316940 [debug] [Thread-4 (]: Began compiling node test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c
+[0m12:52:14.320453 [debug] [Thread-1 (]: Began executing node seed.price_analytics.brands
+[0m12:52:14.331626 [debug] [Thread-2 (]: Began executing node seed.price_analytics.category_map
+[0m12:52:14.791619 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8"
+[0m12:52:14.816454 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c"
+[0m12:52:15.069608 [debug] [Thread-2 (]: Using postgres connection "seed.price_analytics.category_map"
+[0m12:52:15.064792 [debug] [Thread-1 (]: Using postgres connection "seed.price_analytics.brands"
+[0m12:52:15.101209 [debug] [Thread-4 (]: Began executing node test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c
+[0m12:52:15.103815 [debug] [Thread-3 (]: Began executing node test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8
+[0m12:52:15.106708 [debug] [Thread-2 (]: On seed.price_analytics.category_map: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "seed.price_analytics.category_map"} */
+
+    create table "price_analytics"."silver"."category_map" ("platform" text,"breadcrumb" text,"category" text)
+  
+[0m12:52:15.110891 [debug] [Thread-1 (]: On seed.price_analytics.brands: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "seed.price_analytics.brands"} */
+
+    create table "price_analytics"."silver"."brands" ("brand" text)
+  
+[0m12:52:15.256379 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m12:52:15.303410 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8"
+[0m12:52:15.326347 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c"
+[0m12:52:15.330037 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m12:52:15.353467 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8"
+[0m12:52:15.355998 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c"
+[0m12:52:15.359908 [debug] [Thread-3 (]: On test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        data_source as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."raw"."crawl_product_price"
+    group by data_source
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'live','synthetic'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:15.366307 [debug] [Thread-4 (]: On test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        platform as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."raw"."crawl_product_price"
+    group by platform
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'Klik Indomaret','Blibli','Tokopedia'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:15.371815 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m12:52:15.379186 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m12:52:15.496611 [debug] [Thread-2 (]: SQL status: CREATE TABLE in 0.241 seconds
+[0m12:52:15.503305 [debug] [Thread-1 (]: SQL status: CREATE TABLE in 0.173 seconds
+[0m12:52:15.578182 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.199 seconds
+[0m12:52:15.621609 [debug] [Thread-1 (]: Using postgres connection "seed.price_analytics.brands"
+[0m12:52:15.635018 [debug] [Thread-2 (]: Using postgres connection "seed.price_analytics.category_map"
+[0m12:52:15.656450 [debug] [Thread-4 (]: On test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c: ROLLBACK
+[0m12:52:15.659049 [debug] [Thread-1 (]: On seed.price_analytics.brands: 
+          insert into "price_analytics"."silver"."brands" ("brand") values
+          (%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s),(%s)
+      ...
+[0m12:52:15.663126 [debug] [Thread-2 (]: On seed.price_analytics.category_map: 
+          insert into "price_analytics"."silver"."category_map" ("platform", "breadcrumb", "category") values
+          (%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s)
+      ...
+[0m12:52:15.670377 [debug] [Thread-4 (]: On test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c: Close
+[0m12:52:15.671737 [debug] [Thread-1 (]: SQL status: INSERT 0 14 in 0.003 seconds
+[0m12:52:15.703714 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.330 seconds
+[0m12:52:15.705780 [debug] [Thread-2 (]: SQL status: INSERT 0 12 in 0.030 seconds
+[0m12:52:15.680386 [info ] [Thread-4 (]: 4 of 31 PASS source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia  [[32mPASS[0m in 1.40s]
+[0m12:52:15.733291 [debug] [Thread-1 (]: Writing runtime SQL for node "seed.price_analytics.brands"
+[0m12:52:15.744464 [debug] [Thread-3 (]: On test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8: ROLLBACK
+[0m12:52:15.752145 [debug] [Thread-2 (]: Writing runtime SQL for node "seed.price_analytics.category_map"
+[0m12:52:15.758189 [debug] [Thread-4 (]: Finished running node test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c
+[0m12:52:15.778993 [debug] [Thread-3 (]: On test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8: Close
+[0m12:52:15.842521 [debug] [Thread-4 (]: Began running node test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a
+[0m12:52:15.929827 [debug] [Thread-1 (]: On seed.price_analytics.brands: COMMIT
+[0m12:52:15.937854 [info ] [Thread-3 (]: 3 of 31 PASS source_accepted_values_raw_crawl_product_price_data_source__live__synthetic  [[32mPASS[0m in 1.67s]
+[0m12:52:15.962112 [debug] [Thread-2 (]: On seed.price_analytics.category_map: COMMIT
+[0m12:52:15.950273 [info ] [Thread-4 (]: 5 of 31 START test source_not_null_raw_crawl_product_price_crawled_at .......... [RUN]
+[0m12:52:15.967848 [debug] [Thread-1 (]: Using postgres connection "seed.price_analytics.brands"
+[0m12:52:15.973817 [debug] [Thread-3 (]: Finished running node test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8
+[0m12:52:15.980297 [debug] [Thread-2 (]: Using postgres connection "seed.price_analytics.category_map"
+[0m12:52:15.984969 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_accepted_values_raw_crawl_product_price_platform__Klik_Indomaret__Blibli__Tokopedia.0e84cac90c, now test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a)
+[0m12:52:15.989085 [debug] [Thread-1 (]: On seed.price_analytics.brands: COMMIT
+[0m12:52:15.999192 [debug] [Thread-3 (]: Began running node test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce
+[0m12:52:16.003329 [debug] [Thread-2 (]: On seed.price_analytics.category_map: COMMIT
+[0m12:52:16.010441 [debug] [Thread-4 (]: Began compiling node test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a
+[0m12:52:16.021882 [debug] [Thread-1 (]: SQL status: COMMIT in 0.006 seconds
+[0m12:52:16.019833 [info ] [Thread-3 (]: 6 of 31 START test source_not_null_raw_crawl_product_price_payload_hash ........ [RUN]
+[0m12:52:16.040893 [debug] [Thread-2 (]: SQL status: COMMIT in 0.013 seconds
+[0m12:52:16.106150 [debug] [Thread-2 (]: On seed.price_analytics.category_map: Close
+[0m12:52:16.093526 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a"
+[0m12:52:16.098293 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_accepted_values_raw_crawl_product_price_data_source__live__synthetic.a20e997db8, now test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce)
+[0m12:52:16.074949 [debug] [Thread-1 (]: On seed.price_analytics.brands: Close
+[0m12:52:16.126313 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA5103E1B0>]}
+[0m12:52:16.131779 [debug] [Thread-3 (]: Began compiling node test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce
+[0m12:52:16.137604 [debug] [Thread-4 (]: Began executing node test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a
+[0m12:52:16.143858 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA510329F0>]}
+[0m12:52:16.147668 [info ] [Thread-2 (]: 2 of 31 OK loaded seed file silver.category_map ................................ [[32mINSERT 12[0m in 1.85s]
+[0m12:52:16.200624 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce"
+[0m12:52:16.208702 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a"
+[0m12:52:16.216086 [info ] [Thread-1 (]: 1 of 31 OK loaded seed file silver.brands ...................................... [[32mINSERT 14[0m in 1.88s]
+[0m12:52:16.231095 [debug] [Thread-2 (]: Finished running node seed.price_analytics.category_map
+[0m12:52:16.261789 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a"
+[0m12:52:16.268365 [debug] [Thread-1 (]: Finished running node seed.price_analytics.brands
+[0m12:52:16.270996 [debug] [Thread-3 (]: Began executing node test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce
+[0m12:52:16.282436 [debug] [Thread-2 (]: Began running node test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346
+[0m12:52:16.294276 [debug] [Thread-4 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select crawled_at
+from "price_analytics"."raw"."crawl_product_price"
+where crawled_at is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:16.299392 [debug] [Thread-1 (]: Began running node test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d
+[0m12:52:16.309049 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce"
+[0m12:52:16.314248 [info ] [Thread-2 (]: 7 of 31 START test source_not_null_raw_crawl_product_price_platform ............ [RUN]
+[0m12:52:16.318486 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:16.323576 [info ] [Thread-1 (]: 8 of 31 START test source_not_null_raw_crawl_product_price_raw_id .............. [RUN]
+[0m12:52:16.332239 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly seed.price_analytics.category_map, now test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346)
+[0m12:52:16.337632 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce"
+[0m12:52:16.341459 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly seed.price_analytics.brands, now test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d)
+[0m12:52:16.345098 [debug] [Thread-2 (]: Began compiling node test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346
+[0m12:52:16.349102 [debug] [Thread-3 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select payload_hash
+from "price_analytics"."raw"."crawl_product_price"
+where payload_hash is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:16.354111 [debug] [Thread-1 (]: Began compiling node test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d
+[0m12:52:16.390276 [debug] [Thread-2 (]: Writing injected SQL for node "test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346"
+[0m12:52:16.392165 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m12:52:16.422384 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.103 seconds
+[0m12:52:16.426993 [debug] [Thread-1 (]: Writing injected SQL for node "test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d"
+[0m12:52:16.437811 [debug] [Thread-2 (]: Began executing node test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346
+[0m12:52:16.442047 [debug] [Thread-4 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a: ROLLBACK
+[0m12:52:16.451308 [debug] [Thread-2 (]: Writing runtime sql for node "test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346"
+[0m12:52:16.458532 [debug] [Thread-1 (]: Began executing node test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d
+[0m12:52:16.461555 [debug] [Thread-4 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a: Close
+[0m12:52:16.469227 [debug] [Thread-2 (]: Using postgres connection "test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346"
+[0m12:52:16.473275 [debug] [Thread-1 (]: Writing runtime sql for node "test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d"
+[0m12:52:16.477820 [info ] [Thread-4 (]: 5 of 31 PASS source_not_null_raw_crawl_product_price_crawled_at ................ [[32mPASS[0m in 0.49s]
+[0m12:52:16.481278 [debug] [Thread-2 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select platform
+from "price_analytics"."raw"."crawl_product_price"
+where platform is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:16.489311 [debug] [Thread-4 (]: Finished running node test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a
+[0m12:52:16.493415 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:16.495451 [debug] [Thread-1 (]: Using postgres connection "test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d"
+[0m12:52:16.497451 [debug] [Thread-4 (]: Began running node test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751
+[0m12:52:16.503143 [debug] [Thread-1 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select raw_id
+from "price_analytics"."raw"."crawl_product_price"
+where raw_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:16.510201 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.118 seconds
+[0m12:52:16.507671 [info ] [Thread-4 (]: 9 of 31 START test source_not_null_raw_crawl_product_price_source_url .......... [RUN]
+[0m12:52:16.513225 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:52:16.523415 [debug] [Thread-3 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce: ROLLBACK
+[0m12:52:16.527863 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_not_null_raw_crawl_product_price_crawled_at.80d8c8ed2a, now test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751)
+[0m12:52:16.539247 [debug] [Thread-3 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce: Close
+[0m12:52:16.541270 [debug] [Thread-4 (]: Began compiling node test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751
+[0m12:52:16.551317 [info ] [Thread-3 (]: 6 of 31 PASS source_not_null_raw_crawl_product_price_payload_hash .............. [[32mPASS[0m in 0.45s]
+[0m12:52:16.592387 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.099 seconds
+[0m12:52:16.601546 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751"
+[0m12:52:16.608686 [debug] [Thread-3 (]: Finished running node test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce
+[0m12:52:16.620519 [debug] [Thread-2 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346: ROLLBACK
+[0m12:52:16.630090 [debug] [Thread-3 (]: Began running node test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c
+[0m12:52:16.635126 [debug] [Thread-4 (]: Began executing node test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751
+[0m12:52:16.643991 [debug] [Thread-2 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346: Close
+[0m12:52:16.651802 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751"
+[0m12:52:16.655327 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.141 seconds
+[0m12:52:16.642487 [info ] [Thread-3 (]: 10 of 31 START test source_unique_raw_crawl_product_price_raw_id ............... [RUN]
+[0m12:52:16.660227 [info ] [Thread-2 (]: 7 of 31 PASS source_not_null_raw_crawl_product_price_platform .................. [[32mPASS[0m in 0.33s]
+[0m12:52:16.672324 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751"
+[0m12:52:16.679129 [debug] [Thread-1 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d: ROLLBACK
+[0m12:52:16.683377 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_not_null_raw_crawl_product_price_payload_hash.bcd4281bce, now test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c)
+[0m12:52:16.689218 [debug] [Thread-2 (]: Finished running node test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346
+[0m12:52:16.697128 [debug] [Thread-4 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select source_url
+from "price_analytics"."raw"."crawl_product_price"
+where source_url is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:16.702763 [debug] [Thread-1 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d: Close
+[0m12:52:16.705911 [debug] [Thread-3 (]: Began compiling node test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c
+[0m12:52:16.713471 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:16.719020 [info ] [Thread-1 (]: 8 of 31 PASS source_not_null_raw_crawl_product_price_raw_id .................... [[32mPASS[0m in 0.38s]
+[0m12:52:16.771720 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c"
+[0m12:52:16.782237 [debug] [Thread-1 (]: Finished running node test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d
+[0m12:52:16.792542 [debug] [Thread-3 (]: Began executing node test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c
+[0m12:52:16.804819 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c"
+[0m12:52:16.815449 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c"
+[0m12:52:16.820473 [debug] [Thread-3 (]: On test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    raw_id as unique_field,
+    count(*) as n_records
+
+from "price_analytics"."raw"."crawl_product_price"
+where raw_id is not null
+group by raw_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:16.823523 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.110 seconds
+[0m12:52:16.827792 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m12:52:16.836799 [debug] [Thread-4 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751: ROLLBACK
+[0m12:52:16.844386 [debug] [Thread-4 (]: On test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751: Close
+[0m12:52:16.850538 [info ] [Thread-4 (]: 9 of 31 PASS source_not_null_raw_crawl_product_price_source_url ................ [[32mPASS[0m in 0.32s]
+[0m12:52:16.859000 [debug] [Thread-4 (]: Finished running node test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751
+[0m12:52:16.908649 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.081 seconds
+[0m12:52:16.915893 [debug] [Thread-3 (]: On test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c: ROLLBACK
+[0m12:52:16.921875 [debug] [Thread-3 (]: On test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c: Close
+[0m12:52:16.930326 [info ] [Thread-3 (]: 10 of 31 PASS source_unique_raw_crawl_product_price_raw_id ..................... [[32mPASS[0m in 0.25s]
+[0m12:52:16.942329 [debug] [Thread-3 (]: Finished running node test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c
+[0m12:52:16.950192 [debug] [Thread-2 (]: Began running node model.price_analytics.stg_crawl_product_price
+[0m12:52:16.957868 [info ] [Thread-2 (]: 11 of 31 START sql view model silver.stg_crawl_product_price ................... [RUN]
+[0m12:52:16.970324 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_not_null_raw_crawl_product_price_platform.50f915b346, now model.price_analytics.stg_crawl_product_price)
+[0m12:52:16.978918 [debug] [Thread-2 (]: Began compiling node model.price_analytics.stg_crawl_product_price
+[0m12:52:17.000487 [debug] [Thread-2 (]: Writing injected SQL for node "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.015891 [debug] [Thread-2 (]: Began executing node model.price_analytics.stg_crawl_product_price
+[0m12:52:17.232332 [debug] [Thread-2 (]: Writing runtime sql for node "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.272820 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.284352 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+
+  create view "price_analytics"."silver"."stg_crawl_product_price__dbt_tmp"
+    
+    
+  as (
+    with src as (
+    select * from "price_analytics"."raw"."crawl_product_price"
+),
+
+parsed as (
+    select
+        raw_id,
+        platform,
+        source_url,
+        crawled_at,
+        crawl_date,
+        crawler_version,
+        data_source,
+        product_name,
+        breadcrumb,
+        -- "Rp 14.500" / "Rp14.500" -> 14500
+        nullif(regexp_replace(price_text, '[^0-9]', '', 'g'), '')::numeric          as price_idr,
+        nullif(regexp_replace(original_price_text, '[^0-9]', '', 'g'), '')::numeric as original_price_idr,
+        -- "9%" -> 9 ; "-10%" -> -10 (nilai di luar 0..100 dibiarkan agar bisa ditandai)
+        nullif(substring(discount_text from '-?[0-9]+'), '')::numeric               as discount_pct_raw,
+        lower(product_name)                                                         as name_lower,
+        regexp_match(lower(product_name), '(\d+(?:[.,]\d+)?)\s*(ml|kg|g|l|pcs)(?![a-z])')                           as size_m
+    from src
+),
+
+sized as (
+    select
+        *,
+        replace(size_m[1], ',', '.')::numeric as size_qty,
+        size_m[2]                             as size_unit
+    from parsed
+),
+
+normalized as (
+    select
+        *,
+        -- satuan dasar: ml (dari ml, L), g (dari g, kg), pcs
+        round(case size_unit when 'l' then size_qty * 1000
+                             when 'kg' then size_qty * 1000
+                             else size_qty end)::int as pack_qty_base,
+        case size_unit when 'l' then 'ml' when 'ml' then 'ml'
+                       when 'kg' then 'g' when 'g' then 'g'
+                       when 'pcs' then 'pcs' end      as pack_unit_base,
+        -- nama tanpa ukuran, tanpa tanda baca
+        trim(regexp_replace(regexp_replace(name_lower, '(\d+(?:[.,]\d+)?)\s*(ml|kg|g|l|pcs)(?![a-z])', ' '), '[^a-z0-9]+', ' ', 'g')) as name_clean
+    from sized
+),
+
+keyed as (
+    select
+        n.*,
+        -- kumpulan kata unik (tanpa kata promosi), diurutkan, sehingga urutan kata tidak berpengaruh
+        (select string_agg(distinct t, ' ' order by t)
+           from unnest(string_to_array(n.name_clean, ' ')) as t
+          where t <> ''
+            and t not in ('official', 'store', 'isi', 'lebih', 'promo', 'pack', 'unilever')) as name_key
+    from normalized n
+)
+
+select
+    raw_id, platform, source_url, crawled_at, crawl_date, crawler_version, data_source,
+    product_name, breadcrumb, price_idr, original_price_idr, discount_pct_raw,
+    pack_qty_base, pack_unit_base, name_clean, name_key,
+    name_key || '|' || coalesce(pack_qty_base::text, 'na') || coalesce(pack_unit_base, 'na') as match_key
+from keyed
+  );
+[0m12:52:17.290595 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:17.413283 [debug] [Thread-2 (]: SQL status: CREATE VIEW in 0.122 seconds
+[0m12:52:17.446446 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.450905 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+alter table "price_analytics"."silver"."stg_crawl_product_price" rename to "stg_crawl_product_price__dbt_backup"
+[0m12:52:17.461710 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.007 seconds
+[0m12:52:17.474582 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.479127 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+alter table "price_analytics"."silver"."stg_crawl_product_price__dbt_tmp" rename to "stg_crawl_product_price"
+[0m12:52:17.491666 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.009 seconds
+[0m12:52:17.511079 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: COMMIT
+[0m12:52:17.515748 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.520427 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: COMMIT
+[0m12:52:17.533181 [debug] [Thread-2 (]: SQL status: COMMIT in 0.008 seconds
+[0m12:52:17.565645 [debug] [Thread-2 (]: Applying DROP to: "price_analytics"."silver"."stg_crawl_product_price__dbt_backup"
+[0m12:52:17.591810 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.stg_crawl_product_price"
+[0m12:52:17.595554 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.stg_crawl_product_price"} */
+drop view if exists "price_analytics"."silver"."stg_crawl_product_price__dbt_backup" cascade
+[0m12:52:17.626327 [debug] [Thread-2 (]: SQL status: DROP VIEW in 0.027 seconds
+[0m12:52:17.635237 [debug] [Thread-2 (]: On model.price_analytics.stg_crawl_product_price: Close
+[0m12:52:17.640564 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA510DC350>]}
+[0m12:52:17.647051 [info ] [Thread-2 (]: 11 of 31 OK created sql view model silver.stg_crawl_product_price .............. [[32mCREATE VIEW[0m in 0.67s]
+[0m12:52:17.652205 [debug] [Thread-2 (]: Finished running node model.price_analytics.stg_crawl_product_price
+[0m12:52:17.657732 [debug] [Thread-4 (]: Began running node test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956
+[0m12:52:17.659768 [debug] [Thread-3 (]: Began running node test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15
+[0m12:52:17.661300 [debug] [Thread-1 (]: Began running node test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303
+[0m12:52:17.663301 [debug] [Thread-2 (]: Began running node test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212
+[0m12:52:17.664781 [info ] [Thread-4 (]: 12 of 31 START test accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs  [RUN]
+[0m12:52:17.667784 [info ] [Thread-3 (]: 13 of 31 START test not_null_stg_crawl_product_price_match_key ................. [RUN]
+[0m12:52:17.670290 [info ] [Thread-1 (]: 14 of 31 START test not_null_stg_crawl_product_price_pack_unit_base ............ [RUN]
+[0m12:52:17.674585 [info ] [Thread-2 (]: 15 of 31 START test not_null_stg_crawl_product_price_raw_id .................... [RUN]
+[0m12:52:17.679137 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_not_null_raw_crawl_product_price_source_url.f0675ae751, now test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956)
+[0m12:52:17.683152 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_unique_raw_crawl_product_price_raw_id.d3b49c564c, now test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15)
+[0m12:52:17.687605 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.price_analytics.source_not_null_raw_crawl_product_price_raw_id.0a907f539d, now test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303)
+[0m12:52:17.692792 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.price_analytics.stg_crawl_product_price, now test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212)
+[0m12:52:17.696355 [debug] [Thread-4 (]: Began compiling node test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956
+[0m12:52:17.699928 [debug] [Thread-3 (]: Began compiling node test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15
+[0m12:52:17.704607 [debug] [Thread-1 (]: Began compiling node test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303
+[0m12:52:17.708632 [debug] [Thread-2 (]: Began compiling node test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212
+[0m12:52:17.812520 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15"
+[0m12:52:17.851303 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956"
+[0m12:52:17.892100 [debug] [Thread-1 (]: Writing injected SQL for node "test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303"
+[0m12:52:17.936308 [debug] [Thread-2 (]: Writing injected SQL for node "test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212"
+[0m12:52:17.956649 [debug] [Thread-3 (]: Began executing node test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15
+[0m12:52:17.970395 [debug] [Thread-4 (]: Began executing node test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956
+[0m12:52:17.994233 [debug] [Thread-1 (]: Began executing node test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303
+[0m12:52:17.995580 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15"
+[0m12:52:18.006083 [debug] [Thread-2 (]: Began executing node test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212
+[0m12:52:18.026388 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956"
+[0m12:52:18.044275 [debug] [Thread-1 (]: Writing runtime sql for node "test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303"
+[0m12:52:18.062502 [debug] [Thread-2 (]: Writing runtime sql for node "test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212"
+[0m12:52:18.064020 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15"
+[0m12:52:18.081769 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956"
+[0m12:52:18.098125 [debug] [Thread-3 (]: On test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select match_key
+from "price_analytics"."silver"."stg_crawl_product_price"
+where match_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:18.100121 [debug] [Thread-1 (]: Using postgres connection "test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303"
+[0m12:52:18.104730 [debug] [Thread-2 (]: Using postgres connection "test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212"
+[0m12:52:18.107821 [debug] [Thread-4 (]: On test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        pack_unit_base as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."silver"."stg_crawl_product_price"
+    group by pack_unit_base
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'ml','g','pcs'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:18.116442 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m12:52:18.121237 [debug] [Thread-1 (]: On test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select pack_unit_base
+from "price_analytics"."silver"."stg_crawl_product_price"
+where pack_unit_base is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:18.133394 [debug] [Thread-2 (]: On test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select raw_id
+from "price_analytics"."silver"."stg_crawl_product_price"
+where raw_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:18.136883 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:18.146503 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:52:18.153484 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:18.383882 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.230 seconds
+[0m12:52:18.395809 [debug] [Thread-2 (]: On test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212: ROLLBACK
+[0m12:52:18.402784 [debug] [Thread-2 (]: On test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212: Close
+[0m12:52:18.411739 [info ] [Thread-2 (]: 15 of 31 PASS not_null_stg_crawl_product_price_raw_id .......................... [[32mPASS[0m in 0.72s]
+[0m12:52:18.425684 [debug] [Thread-2 (]: Finished running node test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212
+[0m12:52:18.440565 [debug] [Thread-2 (]: Began running node test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237
+[0m12:52:18.456361 [info ] [Thread-2 (]: 16 of 31 START test unique_stg_crawl_product_price_raw_id ...................... [RUN]
+[0m12:52:18.465722 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_stg_crawl_product_price_raw_id.7e2c631212, now test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237)
+[0m12:52:18.472541 [debug] [Thread-2 (]: Began compiling node test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237
+[0m12:52:18.525052 [debug] [Thread-2 (]: Writing injected SQL for node "test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237"
+[0m12:52:18.551679 [debug] [Thread-2 (]: Began executing node test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237
+[0m12:52:18.582197 [debug] [Thread-2 (]: Writing runtime sql for node "test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237"
+[0m12:52:18.648082 [debug] [Thread-2 (]: Using postgres connection "test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237"
+[0m12:52:18.672382 [debug] [Thread-2 (]: On test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    raw_id as unique_field,
+    count(*) as n_records
+
+from "price_analytics"."silver"."stg_crawl_product_price"
+where raw_id is not null
+group by raw_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:18.690000 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:18.718804 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.581 seconds
+[0m12:52:18.730844 [debug] [Thread-4 (]: On test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956: ROLLBACK
+[0m12:52:18.746724 [debug] [Thread-4 (]: On test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956: Close
+[0m12:52:18.753722 [info ] [Thread-4 (]: 12 of 31 PASS accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs  [[32mPASS[0m in 1.07s]
+[0m12:52:18.763145 [debug] [Thread-4 (]: Finished running node test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956
+[0m12:52:18.770448 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.624 seconds
+[0m12:52:18.791629 [debug] [Thread-1 (]: On test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303: ROLLBACK
+[0m12:52:18.812477 [debug] [Thread-1 (]: On test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303: Close
+[0m12:52:18.825407 [info ] [Thread-1 (]: 14 of 31 PASS not_null_stg_crawl_product_price_pack_unit_base .................. [[32mPASS[0m in 1.14s]
+[0m12:52:18.838122 [debug] [Thread-1 (]: Finished running node test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303
+[0m12:52:19.061553 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.371 seconds
+[0m12:52:19.140267 [debug] [Thread-2 (]: On test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237: ROLLBACK
+[0m12:52:19.171019 [debug] [Thread-2 (]: On test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237: Close
+[0m12:52:19.214932 [info ] [Thread-2 (]: 16 of 31 PASS unique_stg_crawl_product_price_raw_id ............................ [[32mPASS[0m in 0.75s]
+[0m12:52:19.339348 [debug] [Thread-2 (]: Finished running node test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237
+[0m12:52:19.611447 [debug] [Thread-3 (]: SQL status: SELECT 1 in 1.494 seconds
+[0m12:52:19.628758 [debug] [Thread-3 (]: On test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15: ROLLBACK
+[0m12:52:19.639337 [debug] [Thread-3 (]: On test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15: Close
+[0m12:52:19.648246 [info ] [Thread-3 (]: 13 of 31 PASS not_null_stg_crawl_product_price_match_key ....................... [[32mPASS[0m in 1.96s]
+[0m12:52:19.662957 [debug] [Thread-3 (]: Finished running node test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15
+[0m12:52:19.679583 [debug] [Thread-4 (]: Began running node model.price_analytics.silver_price_observation
+[0m12:52:19.688455 [info ] [Thread-4 (]: 17 of 31 START sql view model silver.silver_price_observation .................. [RUN]
+[0m12:52:19.697416 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.accepted_values_stg_crawl_product_price_pack_unit_base__ml__g__pcs.5934db0956, now model.price_analytics.silver_price_observation)
+[0m12:52:19.705179 [debug] [Thread-4 (]: Began compiling node model.price_analytics.silver_price_observation
+[0m12:52:19.731140 [debug] [Thread-4 (]: Writing injected SQL for node "model.price_analytics.silver_price_observation"
+[0m12:52:19.746751 [debug] [Thread-4 (]: Began executing node model.price_analytics.silver_price_observation
+[0m12:52:19.766221 [debug] [Thread-4 (]: Writing runtime sql for node "model.price_analytics.silver_price_observation"
+[0m12:52:19.779736 [debug] [Thread-4 (]: Using postgres connection "model.price_analytics.silver_price_observation"
+[0m12:52:19.787745 [debug] [Thread-4 (]: On model.price_analytics.silver_price_observation: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_price_observation"} */
+
+  create view "price_analytics"."silver"."silver_price_observation__dbt_tmp"
+    
+    
+  as (
+    with ranked as (
+    select
+        s.*,
+        row_number() over (
+            partition by platform, source_url, crawl_date
+            order by crawled_at desc, raw_id desc
+        ) as rn
+    from "price_analytics"."silver"."stg_crawl_product_price" s
+),
+
+latest as (
+    select * from ranked where rn = 1
+),
+
+branded as (
+    select
+        l.*,
+        (select b.brand from "price_analytics"."silver"."brands" b
+          where ' ' || l.name_clean || ' ' like '% ' || lower(b.brand) || ' %'
+          order by length(b.brand) desc limit 1) as brand,
+        c.category as category_from_breadcrumb
+    from latest l
+    left join "price_analytics"."silver"."category_map" c
+           on c.platform = l.platform and c.breadcrumb = l.breadcrumb
+),
+
+checked as (
+    select
+        *,
+        case
+            when price_idr is null                                         then 'price_missing'
+            when price_idr <= 0                                            then 'price_not_positive'
+            when discount_pct_raw is not null
+                 and (discount_pct_raw < 0 or discount_pct_raw > 100)      then 'discount_out_of_range'
+            when original_price_idr is not null
+                 and price_idr > original_price_idr                        then 'price_gt_original'
+        end as dq_issue
+    from branded
+)
+
+select
+    md5(platform || '|' || source_url)                         as listing_key,
+    md5(match_key)                                             as product_key,
+    platform,
+    source_url,
+    crawl_date,
+    crawled_at,
+    product_name,
+    brand,
+    category_from_breadcrumb,
+    pack_qty_base,
+    pack_unit_base,
+    match_key,
+    price_idr,
+    coalesce(original_price_idr, price_idr)                    as original_price_idr,
+    case when price_idr > 0 and coalesce(original_price_idr, price_idr) >= price_idr
+         then round((1 - price_idr / coalesce(original_price_idr, price_idr)) * 100, 1)
+         else 0 end                                            as discount_pct,
+    dq_issue,
+    (dq_issue is null)                                         as is_valid,
+    data_source,
+    raw_id
+from checked
+  );
+[0m12:52:19.792990 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:20.067494 [debug] [Thread-4 (]: SQL status: CREATE VIEW in 0.275 seconds
+[0m12:52:20.091589 [debug] [Thread-4 (]: Using postgres connection "model.price_analytics.silver_price_observation"
+[0m12:52:20.137643 [debug] [Thread-4 (]: On model.price_analytics.silver_price_observation: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_price_observation"} */
+alter table "price_analytics"."silver"."silver_price_observation__dbt_tmp" rename to "silver_price_observation"
+[0m12:52:20.167397 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.015 seconds
+[0m12:52:20.187641 [debug] [Thread-4 (]: On model.price_analytics.silver_price_observation: COMMIT
+[0m12:52:20.203813 [debug] [Thread-4 (]: Using postgres connection "model.price_analytics.silver_price_observation"
+[0m12:52:20.263404 [debug] [Thread-4 (]: On model.price_analytics.silver_price_observation: COMMIT
+[0m12:52:20.297151 [debug] [Thread-4 (]: SQL status: COMMIT in 0.020 seconds
+[0m12:52:20.308042 [debug] [Thread-4 (]: Applying DROP to: "price_analytics"."silver"."silver_price_observation__dbt_backup"
+[0m12:52:20.318532 [debug] [Thread-4 (]: Using postgres connection "model.price_analytics.silver_price_observation"
+[0m12:52:20.321281 [debug] [Thread-4 (]: On model.price_analytics.silver_price_observation: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_price_observation"} */
+drop view if exists "price_analytics"."silver"."silver_price_observation__dbt_backup" cascade
+[0m12:52:20.346666 [debug] [Thread-4 (]: SQL status: DROP VIEW in 0.013 seconds
+[0m12:52:20.356406 [debug] [Thread-4 (]: On model.price_analytics.silver_price_observation: Close
+[0m12:52:20.371786 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA510E35C0>]}
+[0m12:52:20.407658 [info ] [Thread-4 (]: 17 of 31 OK created sql view model silver.silver_price_observation ............. [[32mCREATE VIEW[0m in 0.68s]
+[0m12:52:20.421991 [debug] [Thread-4 (]: Finished running node model.price_analytics.silver_price_observation
+[0m12:52:20.431261 [debug] [Thread-2 (]: Began running node test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27
+[0m12:52:20.434578 [debug] [Thread-3 (]: Began running node test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc
+[0m12:52:20.437134 [debug] [Thread-1 (]: Began running node test.price_analytics.assert_one_observation_per_listing_day
+[0m12:52:20.438647 [debug] [Thread-4 (]: Began running node test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798
+[0m12:52:20.440736 [info ] [Thread-2 (]: 18 of 31 START test accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original  [RUN]
+[0m12:52:20.445829 [info ] [Thread-3 (]: 19 of 31 START test accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia  [RUN]
+[0m12:52:20.452381 [info ] [Thread-1 (]: 20 of 31 START test assert_one_observation_per_listing_day ..................... [RUN]
+[0m12:52:20.459510 [info ] [Thread-4 (]: 21 of 31 START test not_null_silver_price_observation_is_valid ................. [RUN]
+[0m12:52:20.497084 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.price_analytics.silver_price_observation, now test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798)
+[0m12:52:20.478134 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_stg_crawl_product_price_match_key.3196a3ac15, now test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc)
+[0m12:52:20.487339 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_stg_crawl_product_price_pack_unit_base.5ad6a3a303, now test.price_analytics.assert_one_observation_per_listing_day)
+[0m12:52:20.469681 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.price_analytics.unique_stg_crawl_product_price_raw_id.4ca358a237, now test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27)
+[0m12:52:20.510333 [debug] [Thread-4 (]: Began compiling node test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798
+[0m12:52:20.514730 [debug] [Thread-3 (]: Began compiling node test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc
+[0m12:52:20.524071 [debug] [Thread-1 (]: Began compiling node test.price_analytics.assert_one_observation_per_listing_day
+[0m12:52:20.536479 [debug] [Thread-2 (]: Began compiling node test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27
+[0m12:52:20.580143 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798"
+[0m12:52:20.635549 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc"
+[0m12:52:20.646055 [debug] [Thread-1 (]: Writing injected SQL for node "test.price_analytics.assert_one_observation_per_listing_day"
+[0m12:52:20.804269 [debug] [Thread-2 (]: Writing injected SQL for node "test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27"
+[0m12:52:20.817636 [debug] [Thread-4 (]: Began executing node test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798
+[0m12:52:20.820273 [debug] [Thread-3 (]: Began executing node test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc
+[0m12:52:20.841314 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798"
+[0m12:52:20.843233 [debug] [Thread-1 (]: Began executing node test.price_analytics.assert_one_observation_per_listing_day
+[0m12:52:20.847983 [debug] [Thread-2 (]: Began executing node test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27
+[0m12:52:20.858844 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc"
+[0m12:52:20.875946 [debug] [Thread-1 (]: Writing runtime sql for node "test.price_analytics.assert_one_observation_per_listing_day"
+[0m12:52:20.878520 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798"
+[0m12:52:20.898554 [debug] [Thread-2 (]: Writing runtime sql for node "test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27"
+[0m12:52:20.916136 [debug] [Thread-4 (]: On test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select is_valid
+from "price_analytics"."silver"."silver_price_observation"
+where is_valid is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:20.930976 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc"
+[0m12:52:20.935874 [debug] [Thread-1 (]: Using postgres connection "test.price_analytics.assert_one_observation_per_listing_day"
+[0m12:52:20.948593 [debug] [Thread-2 (]: Using postgres connection "test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27"
+[0m12:52:20.952013 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:20.966909 [debug] [Thread-3 (]: On test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        platform as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."silver"."silver_price_observation"
+    group by platform
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'Klik Indomaret','Blibli','Tokopedia'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:20.976587 [debug] [Thread-1 (]: On test.price_analytics.assert_one_observation_per_listing_day: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.assert_one_observation_per_listing_day"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  -- Gagal bila ada lebih dari satu observasi untuk listing yang sama di hari yang sama.
+select listing_key, crawl_date, count(*) as n
+from "price_analytics"."silver"."silver_price_observation"
+group by 1, 2
+having count(*) > 1
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:21.001976 [debug] [Thread-2 (]: On test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        dq_issue as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."silver"."silver_price_observation"
+    group by dq_issue
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'price_missing','price_not_positive','discount_out_of_range','price_gt_original'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:21.020933 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m12:52:21.032172 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:52:21.042026 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:21.223797 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.203 seconds
+[0m12:52:21.233538 [debug] [Thread-3 (]: On test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc: ROLLBACK
+[0m12:52:21.240751 [debug] [Thread-3 (]: On test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc: Close
+[0m12:52:21.246589 [info ] [Thread-3 (]: 19 of 31 PASS accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia  [[32mPASS[0m in 0.77s]
+[0m12:52:21.263144 [debug] [Thread-3 (]: Finished running node test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc
+[0m12:52:21.267971 [debug] [Thread-3 (]: Began running node test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6
+[0m12:52:21.278105 [info ] [Thread-3 (]: 22 of 31 START test not_null_silver_price_observation_listing_key .............. [RUN]
+[0m12:52:21.284677 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.price_analytics.accepted_values_silver_price_observation_platform__Klik_Indomaret__Blibli__Tokopedia.5dfcf28efc, now test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6)
+[0m12:52:21.293646 [debug] [Thread-3 (]: Began compiling node test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6
+[0m12:52:21.335140 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6"
+[0m12:52:21.346826 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.395 seconds
+[0m12:52:21.360774 [debug] [Thread-4 (]: On test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798: ROLLBACK
+[0m12:52:21.364687 [debug] [Thread-3 (]: Began executing node test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6
+[0m12:52:21.376830 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6"
+[0m12:52:21.378589 [debug] [Thread-4 (]: On test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798: Close
+[0m12:52:21.390474 [info ] [Thread-4 (]: 21 of 31 PASS not_null_silver_price_observation_is_valid ....................... [[32mPASS[0m in 0.89s]
+[0m12:52:21.397556 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6"
+[0m12:52:21.400339 [debug] [Thread-4 (]: Finished running node test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798
+[0m12:52:21.404040 [debug] [Thread-3 (]: On test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select listing_key
+from "price_analytics"."silver"."silver_price_observation"
+where listing_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:21.411292 [debug] [Thread-4 (]: Began running node test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81
+[0m12:52:21.421178 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m12:52:21.429576 [info ] [Thread-4 (]: 23 of 31 START test not_null_silver_price_observation_product_key .............. [RUN]
+[0m12:52:21.437693 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.395 seconds
+[0m12:52:21.442451 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_silver_price_observation_is_valid.124dce8798, now test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81)
+[0m12:52:21.451189 [debug] [Thread-2 (]: On test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27: ROLLBACK
+[0m12:52:21.459348 [debug] [Thread-4 (]: Began compiling node test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81
+[0m12:52:21.463874 [debug] [Thread-2 (]: On test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27: Close
+[0m12:52:21.498178 [info ] [Thread-2 (]: 18 of 31 PASS accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original  [[32mPASS[0m in 1.03s]
+[0m12:52:21.526844 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81"
+[0m12:52:21.534053 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.504 seconds
+[0m12:52:21.561130 [debug] [Thread-2 (]: Finished running node test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27
+[0m12:52:21.576485 [debug] [Thread-4 (]: Began executing node test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81
+[0m12:52:21.587112 [debug] [Thread-1 (]: On test.price_analytics.assert_one_observation_per_listing_day: ROLLBACK
+[0m12:52:21.600442 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81"
+[0m12:52:21.604770 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.184 seconds
+[0m12:52:21.610900 [debug] [Thread-1 (]: On test.price_analytics.assert_one_observation_per_listing_day: Close
+[0m12:52:21.623299 [debug] [Thread-3 (]: On test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6: ROLLBACK
+[0m12:52:21.625854 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81"
+[0m12:52:21.629892 [info ] [Thread-1 (]: 20 of 31 PASS assert_one_observation_per_listing_day ........................... [[32mPASS[0m in 1.15s]
+[0m12:52:21.641224 [debug] [Thread-4 (]: On test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_key
+from "price_analytics"."silver"."silver_price_observation"
+where product_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:21.644061 [debug] [Thread-3 (]: On test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6: Close
+[0m12:52:21.646320 [debug] [Thread-1 (]: Finished running node test.price_analytics.assert_one_observation_per_listing_day
+[0m12:52:21.651930 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:21.658721 [info ] [Thread-3 (]: 22 of 31 PASS not_null_silver_price_observation_listing_key .................... [[32mPASS[0m in 0.37s]
+[0m12:52:21.668209 [debug] [Thread-3 (]: Finished running node test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6
+[0m12:52:22.677606 [debug] [Thread-4 (]: SQL status: SELECT 1 in 1.024 seconds
+[0m12:52:22.688256 [debug] [Thread-4 (]: On test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81: ROLLBACK
+[0m12:52:22.709099 [debug] [Thread-4 (]: On test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81: Close
+[0m12:52:22.716512 [info ] [Thread-4 (]: 23 of 31 PASS not_null_silver_price_observation_product_key .................... [[32mPASS[0m in 1.27s]
+[0m12:52:22.730709 [debug] [Thread-4 (]: Finished running node test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81
+[0m12:52:22.744814 [debug] [Thread-2 (]: Began running node model.price_analytics.silver_product_master
+[0m12:52:22.750402 [info ] [Thread-2 (]: 24 of 31 START sql view model silver.silver_product_master ..................... [RUN]
+[0m12:52:22.763820 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.price_analytics.accepted_values_silver_price_observation_dq_issue__price_missing__price_not_positive__discount_out_of_range__price_gt_original.0e578ecd27, now model.price_analytics.silver_product_master)
+[0m12:52:22.768187 [debug] [Thread-2 (]: Began compiling node model.price_analytics.silver_product_master
+[0m12:52:22.786941 [debug] [Thread-2 (]: Writing injected SQL for node "model.price_analytics.silver_product_master"
+[0m12:52:22.801238 [debug] [Thread-2 (]: Began executing node model.price_analytics.silver_product_master
+[0m12:52:22.825178 [debug] [Thread-2 (]: Writing runtime sql for node "model.price_analytics.silver_product_master"
+[0m12:52:22.837350 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.silver_product_master"
+[0m12:52:22.841388 [debug] [Thread-2 (]: On model.price_analytics.silver_product_master: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_product_master"} */
+
+  create view "price_analytics"."silver"."silver_product_master__dbt_tmp"
+    
+    
+  as (
+    with obs as (
+    select * from "price_analytics"."silver"."silver_price_observation"
+),
+
+names as (
+    select
+        product_key, product_name,
+        row_number() over (
+            partition by product_key
+            order by case platform when 'Blibli' then 1 when 'Klik Indomaret' then 2 else 3 end,
+                     crawled_at, raw_id
+        ) as rn
+    from obs
+),
+
+agg as (
+    select
+        product_key,
+        max(match_key)                         as match_key,
+        max(brand)                             as brand,
+        max(category_from_breadcrumb)          as category,
+        max(pack_qty_base)                     as pack_qty_base,
+        max(pack_unit_base)                    as pack_unit_base,
+        count(distinct platform)               as n_platforms,
+        min(crawl_date)                        as first_seen_date
+    from obs
+    group by product_key
+)
+
+select
+    a.product_key,
+    n.product_name as canonical_name,
+    a.brand,
+    a.category,
+    a.pack_qty_base,
+    a.pack_unit_base,
+    a.pack_qty_base::text || ' ' || a.pack_unit_base as pack_size,
+    a.n_platforms,
+    a.first_seen_date,
+    a.match_key
+from agg a
+join names n on n.product_key = a.product_key and n.rn = 1
+  );
+[0m12:52:22.845095 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:22.939850 [debug] [Thread-2 (]: SQL status: CREATE VIEW in 0.095 seconds
+[0m12:52:22.953150 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.silver_product_master"
+[0m12:52:22.959990 [debug] [Thread-2 (]: On model.price_analytics.silver_product_master: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_product_master"} */
+alter table "price_analytics"."silver"."silver_product_master__dbt_tmp" rename to "silver_product_master"
+[0m12:52:22.968707 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.005 seconds
+[0m12:52:22.983295 [debug] [Thread-2 (]: On model.price_analytics.silver_product_master: COMMIT
+[0m12:52:22.990871 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.silver_product_master"
+[0m12:52:22.995939 [debug] [Thread-2 (]: On model.price_analytics.silver_product_master: COMMIT
+[0m12:52:23.020027 [debug] [Thread-2 (]: SQL status: COMMIT in 0.021 seconds
+[0m12:52:23.037856 [debug] [Thread-2 (]: Applying DROP to: "price_analytics"."silver"."silver_product_master__dbt_backup"
+[0m12:52:23.043502 [debug] [Thread-2 (]: Using postgres connection "model.price_analytics.silver_product_master"
+[0m12:52:23.049832 [debug] [Thread-2 (]: On model.price_analytics.silver_product_master: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "model.price_analytics.silver_product_master"} */
+drop view if exists "price_analytics"."silver"."silver_product_master__dbt_backup" cascade
+[0m12:52:23.060904 [debug] [Thread-2 (]: SQL status: DROP VIEW in 0.007 seconds
+[0m12:52:23.069086 [debug] [Thread-2 (]: On model.price_analytics.silver_product_master: Close
+[0m12:52:23.073707 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '5f138e17-0de7-4e5a-a657-fb4ecae58e54', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA510E0410>]}
+[0m12:52:23.082434 [info ] [Thread-2 (]: 24 of 31 OK created sql view model silver.silver_product_master ................ [[32mCREATE VIEW[0m in 0.31s]
+[0m12:52:23.088445 [debug] [Thread-2 (]: Finished running node model.price_analytics.silver_product_master
+[0m12:52:23.098592 [debug] [Thread-3 (]: Began running node test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01
+[0m12:52:23.101120 [debug] [Thread-4 (]: Began running node test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d
+[0m12:52:23.103126 [debug] [Thread-1 (]: Began running node test.price_analytics.not_null_silver_product_master_brand.3a07bda16c
+[0m12:52:23.107735 [debug] [Thread-2 (]: Began running node test.price_analytics.not_null_silver_product_master_category.2754b1cc3b
+[0m12:52:23.105715 [info ] [Thread-3 (]: 25 of 31 START test accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih  [RUN]
+[0m12:52:23.117913 [info ] [Thread-4 (]: 26 of 31 START test accepted_values_silver_product_master_n_platforms__False__2__3  [RUN]
+[0m12:52:23.126483 [info ] [Thread-1 (]: 27 of 31 START test not_null_silver_product_master_brand ....................... [RUN]
+[0m12:52:23.131871 [info ] [Thread-2 (]: 28 of 31 START test not_null_silver_product_master_category .................... [RUN]
+[0m12:52:23.136917 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_silver_price_observation_listing_key.168e5ec6b6, now test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01)
+[0m12:52:23.152623 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_silver_price_observation_product_key.c713c62a81, now test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d)
+[0m12:52:23.168360 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.price_analytics.assert_one_observation_per_listing_day, now test.price_analytics.not_null_silver_product_master_brand.3a07bda16c)
+[0m12:52:23.171906 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.price_analytics.silver_product_master, now test.price_analytics.not_null_silver_product_master_category.2754b1cc3b)
+[0m12:52:23.189580 [debug] [Thread-3 (]: Began compiling node test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01
+[0m12:52:23.193650 [debug] [Thread-4 (]: Began compiling node test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d
+[0m12:52:23.204557 [debug] [Thread-1 (]: Began compiling node test.price_analytics.not_null_silver_product_master_brand.3a07bda16c
+[0m12:52:23.210599 [debug] [Thread-2 (]: Began compiling node test.price_analytics.not_null_silver_product_master_category.2754b1cc3b
+[0m12:52:23.322623 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d"
+[0m12:52:23.427908 [debug] [Thread-1 (]: Writing injected SQL for node "test.price_analytics.not_null_silver_product_master_brand.3a07bda16c"
+[0m12:52:23.452203 [debug] [Thread-3 (]: Writing injected SQL for node "test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01"
+[0m12:52:23.485604 [debug] [Thread-2 (]: Writing injected SQL for node "test.price_analytics.not_null_silver_product_master_category.2754b1cc3b"
+[0m12:52:23.493100 [debug] [Thread-4 (]: Began executing node test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d
+[0m12:52:23.494626 [debug] [Thread-1 (]: Began executing node test.price_analytics.not_null_silver_product_master_brand.3a07bda16c
+[0m12:52:23.505245 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d"
+[0m12:52:23.507329 [debug] [Thread-3 (]: Began executing node test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01
+[0m12:52:23.515583 [debug] [Thread-1 (]: Writing runtime sql for node "test.price_analytics.not_null_silver_product_master_brand.3a07bda16c"
+[0m12:52:23.519544 [debug] [Thread-2 (]: Began executing node test.price_analytics.not_null_silver_product_master_category.2754b1cc3b
+[0m12:52:23.530561 [debug] [Thread-3 (]: Writing runtime sql for node "test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01"
+[0m12:52:23.533997 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d"
+[0m12:52:23.541494 [debug] [Thread-1 (]: Using postgres connection "test.price_analytics.not_null_silver_product_master_brand.3a07bda16c"
+[0m12:52:23.558252 [debug] [Thread-1 (]: On test.price_analytics.not_null_silver_product_master_brand.3a07bda16c: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_silver_product_master_brand.3a07bda16c"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select brand
+from "price_analytics"."silver"."silver_product_master"
+where brand is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:23.554740 [debug] [Thread-4 (]: On test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        n_platforms as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."silver"."silver_product_master"
+    group by n_platforms
+
+)
+
+select *
+from all_values
+where value_field not in (
+    2,3
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:23.549103 [debug] [Thread-2 (]: Writing runtime sql for node "test.price_analytics.not_null_silver_product_master_category.2754b1cc3b"
+[0m12:52:23.561080 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:52:23.564866 [debug] [Thread-3 (]: Using postgres connection "test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01"
+[0m12:52:23.567211 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:23.576242 [debug] [Thread-2 (]: Using postgres connection "test.price_analytics.not_null_silver_product_master_category.2754b1cc3b"
+[0m12:52:23.578479 [debug] [Thread-3 (]: On test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with all_values as (
+
+    select
+        category as value_field,
+        count(*) as n_records
+
+    from "price_analytics"."silver"."silver_product_master"
+    group by category
+
+)
+
+select *
+from all_values
+where value_field not in (
+    'Bumbu & Masakan','Minuman','Perawatan Rambut','Sabun Mandi','Perawatan Mulut','Deterjen & Pembersih'
+)
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:23.585435 [debug] [Thread-2 (]: On test.price_analytics.not_null_silver_product_master_category.2754b1cc3b: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_silver_product_master_category.2754b1cc3b"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select category
+from "price_analytics"."silver"."silver_product_master"
+where category is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:23.589410 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m12:52:23.593287 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:25.614896 [debug] [Thread-1 (]: SQL status: SELECT 1 in 2.054 seconds
+[0m12:52:25.621935 [debug] [Thread-1 (]: On test.price_analytics.not_null_silver_product_master_brand.3a07bda16c: ROLLBACK
+[0m12:52:25.630869 [debug] [Thread-1 (]: On test.price_analytics.not_null_silver_product_master_brand.3a07bda16c: Close
+[0m12:52:25.637576 [info ] [Thread-1 (]: 27 of 31 PASS not_null_silver_product_master_brand ............................. [[32mPASS[0m in 2.47s]
+[0m12:52:25.642224 [debug] [Thread-1 (]: Finished running node test.price_analytics.not_null_silver_product_master_brand.3a07bda16c
+[0m12:52:25.645825 [debug] [Thread-1 (]: Began running node test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd
+[0m12:52:25.649100 [info ] [Thread-1 (]: 29 of 31 START test not_null_silver_product_master_product_key ................. [RUN]
+[0m12:52:25.653419 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_silver_product_master_brand.3a07bda16c, now test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd)
+[0m12:52:25.657089 [debug] [Thread-1 (]: Began compiling node test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd
+[0m12:52:25.693564 [debug] [Thread-1 (]: Writing injected SQL for node "test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd"
+[0m12:52:25.705080 [debug] [Thread-1 (]: Began executing node test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd
+[0m12:52:25.715896 [debug] [Thread-1 (]: Writing runtime sql for node "test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd"
+[0m12:52:25.731220 [debug] [Thread-1 (]: Using postgres connection "test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd"
+[0m12:52:25.737533 [debug] [Thread-1 (]: On test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_key
+from "price_analytics"."silver"."silver_product_master"
+where product_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:25.747141 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m12:52:26.143889 [debug] [Thread-2 (]: SQL status: SELECT 1 in 2.551 seconds
+[0m12:52:26.152054 [debug] [Thread-2 (]: On test.price_analytics.not_null_silver_product_master_category.2754b1cc3b: ROLLBACK
+[0m12:52:26.167014 [debug] [Thread-2 (]: On test.price_analytics.not_null_silver_product_master_category.2754b1cc3b: Close
+[0m12:52:26.174791 [info ] [Thread-2 (]: 28 of 31 PASS not_null_silver_product_master_category .......................... [[32mPASS[0m in 3.00s]
+[0m12:52:26.180736 [debug] [Thread-2 (]: Finished running node test.price_analytics.not_null_silver_product_master_category.2754b1cc3b
+[0m12:52:26.184820 [debug] [Thread-2 (]: Began running node test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef
+[0m12:52:26.188920 [info ] [Thread-2 (]: 30 of 31 START test relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_  [RUN]
+[0m12:52:26.197764 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.price_analytics.not_null_silver_product_master_category.2754b1cc3b, now test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef)
+[0m12:52:26.203381 [debug] [Thread-2 (]: Began compiling node test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef
+[0m12:52:26.293663 [debug] [Thread-4 (]: SQL status: SELECT 1 in 2.726 seconds
+[0m12:52:26.305032 [debug] [Thread-4 (]: On test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d: ROLLBACK
+[0m12:52:26.325454 [debug] [Thread-3 (]: SQL status: SELECT 1 in 2.734 seconds
+[0m12:52:26.377046 [debug] [Thread-2 (]: Writing injected SQL for node "test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef"
+[0m12:52:26.380580 [debug] [Thread-4 (]: On test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d: Close
+[0m12:52:26.395412 [debug] [Thread-3 (]: On test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01: ROLLBACK
+[0m12:52:26.409383 [info ] [Thread-4 (]: 26 of 31 PASS accepted_values_silver_product_master_n_platforms__False__2__3 ... [[32mPASS[0m in 3.26s]
+[0m12:52:26.413412 [debug] [Thread-2 (]: Began executing node test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef
+[0m12:52:26.419664 [debug] [Thread-4 (]: Finished running node test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d
+[0m12:52:26.428896 [debug] [Thread-3 (]: On test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01: Close
+[0m12:52:26.437819 [debug] [Thread-2 (]: Writing runtime sql for node "test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef"
+[0m12:52:26.444509 [debug] [Thread-4 (]: Began running node test.price_analytics.unique_silver_product_master_product_key.e1c6569e48
+[0m12:52:26.452467 [info ] [Thread-3 (]: 25 of 31 PASS accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih  [[32mPASS[0m in 3.32s]
+[0m12:52:26.462849 [info ] [Thread-4 (]: 31 of 31 START test unique_silver_product_master_product_key ................... [RUN]
+[0m12:52:26.470604 [debug] [Thread-3 (]: Finished running node test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01
+[0m12:52:26.473238 [debug] [Thread-2 (]: Using postgres connection "test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef"
+[0m12:52:26.477277 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.price_analytics.accepted_values_silver_product_master_n_platforms__False__2__3.b74bc0d28d, now test.price_analytics.unique_silver_product_master_product_key.e1c6569e48)
+[0m12:52:26.485416 [debug] [Thread-2 (]: On test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select product_key as from_field
+    from "price_analytics"."silver"."silver_price_observation"
+    where product_key is not null
+),
+
+parent as (
+    select product_key as to_field
+    from "price_analytics"."silver"."silver_product_master"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:26.490377 [debug] [Thread-4 (]: Began compiling node test.price_analytics.unique_silver_product_master_product_key.e1c6569e48
+[0m12:52:26.496049 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m12:52:26.531099 [debug] [Thread-4 (]: Writing injected SQL for node "test.price_analytics.unique_silver_product_master_product_key.e1c6569e48"
+[0m12:52:26.540768 [debug] [Thread-4 (]: Began executing node test.price_analytics.unique_silver_product_master_product_key.e1c6569e48
+[0m12:52:26.552436 [debug] [Thread-4 (]: Writing runtime sql for node "test.price_analytics.unique_silver_product_master_product_key.e1c6569e48"
+[0m12:52:26.564806 [debug] [Thread-4 (]: Using postgres connection "test.price_analytics.unique_silver_product_master_product_key.e1c6569e48"
+[0m12:52:26.569333 [debug] [Thread-4 (]: On test.price_analytics.unique_silver_product_master_product_key.e1c6569e48: /* {"app": "dbt", "dbt_version": "1.12.6", "profile_name": "price_analytics", "target_name": "dev", "node_id": "test.price_analytics.unique_silver_product_master_product_key.e1c6569e48"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    product_key as unique_field,
+    count(*) as n_records
+
+from "price_analytics"."silver"."silver_product_master"
+where product_key is not null
+group by product_key
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m12:52:26.573907 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m12:52:28.208811 [debug] [Thread-1 (]: SQL status: SELECT 1 in 2.462 seconds
+[0m12:52:28.221322 [debug] [Thread-1 (]: On test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd: ROLLBACK
+[0m12:52:28.233464 [debug] [Thread-1 (]: On test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd: Close
+[0m12:52:28.239797 [info ] [Thread-1 (]: 29 of 31 PASS not_null_silver_product_master_product_key ....................... [[32mPASS[0m in 2.59s]
+[0m12:52:28.253142 [debug] [Thread-1 (]: Finished running node test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd
+[0m12:52:28.527989 [debug] [Thread-4 (]: SQL status: SELECT 1 in 1.954 seconds
+[0m12:52:28.535575 [debug] [Thread-4 (]: On test.price_analytics.unique_silver_product_master_product_key.e1c6569e48: ROLLBACK
+[0m12:52:28.542044 [debug] [Thread-4 (]: On test.price_analytics.unique_silver_product_master_product_key.e1c6569e48: Close
+[0m12:52:28.547283 [info ] [Thread-4 (]: 31 of 31 PASS unique_silver_product_master_product_key ......................... [[32mPASS[0m in 2.07s]
+[0m12:52:28.551439 [debug] [Thread-4 (]: Finished running node test.price_analytics.unique_silver_product_master_product_key.e1c6569e48
+[0m12:52:29.625957 [debug] [Thread-2 (]: SQL status: SELECT 1 in 3.129 seconds
+[0m12:52:29.636148 [debug] [Thread-2 (]: On test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef: ROLLBACK
+[0m12:52:29.643157 [debug] [Thread-2 (]: On test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef: Close
+[0m12:52:29.648721 [info ] [Thread-2 (]: 30 of 31 PASS relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_  [[32mPASS[0m in 3.45s]
+[0m12:52:29.655619 [debug] [Thread-2 (]: Finished running node test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef
+[0m12:52:29.664542 [debug] [MainThread]: On master: COMMIT
+[0m12:52:29.669156 [debug] [MainThread]: Using postgres connection "master"
+[0m12:52:29.677805 [debug] [MainThread]: On master: COMMIT
+[0m12:52:29.681493 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m12:52:29.751819 [debug] [MainThread]: SQL status: COMMIT in 0.070 seconds
+[0m12:52:29.755861 [debug] [MainThread]: On master: Close
+[0m12:52:29.760465 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m12:52:29.763460 [debug] [MainThread]: Connection 'list_price_analytics' was properly closed.
+[0m12:52:29.766511 [debug] [MainThread]: Connection 'list_price_analytics_silver' was properly closed.
+[0m12:52:29.775922 [debug] [MainThread]: Connection 'test.price_analytics.not_null_silver_product_master_product_key.32c42abdfd' was properly closed.
+[0m12:52:29.784859 [debug] [MainThread]: Connection 'test.price_analytics.relationships_silver_price_observation_product_key__product_key__ref_silver_product_master_.5cb9211cef' was properly closed.
+[0m12:52:29.788481 [debug] [MainThread]: Connection 'test.price_analytics.accepted_values_silver_product_master_category__Bumbu_Masakan__Minuman__Perawatan_Rambut__Sabun_Mandi__Perawatan_Mulut__Deterjen_Pembersih.896853fe01' was properly closed.
+[0m12:52:29.791789 [debug] [MainThread]: Connection 'test.price_analytics.unique_silver_product_master_product_key.e1c6569e48' was properly closed.
+[0m12:52:29.795055 [info ] [MainThread]: 
+[0m12:52:29.798911 [info ] [MainThread]: Finished running 2 seeds, 26 data tests, 3 view models in 0 hours 0 minutes and 17.59 seconds (17.59s).
+[0m12:52:29.823427 [debug] [MainThread]: Command end result
+[0m12:52:30.025814 [debug] [MainThread]: Wrote artifact WritableManifest to D:\BFI\App\price-analytics\dbt\target\manifest.json
+[0m12:52:30.058375 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\BFI\App\price-analytics\dbt\target\semantic_manifest.json
+[0m12:52:30.089656 [debug] [MainThread]: Wrote artifact OsiDocument to D:\BFI\App\price-analytics\dbt\target\osi_document.json
+[0m12:52:30.139510 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\BFI\App\price-analytics\dbt\target\run_results.json
+[0m12:52:30.143568 [info ] [MainThread]: 
+[0m12:52:30.147143 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m12:52:30.151720 [info ] [MainThread]: 
+[0m12:52:30.155912 [info ] [MainThread]: Done. PASS=31 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=31
+[0m12:52:30.163098 [debug] [MainThread]: Command `dbt build` succeeded at 12:52:30.163098 after 26.12 seconds
+[0m12:52:30.168220 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA4FE980E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA4DCF1040>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA4D5682C0>]}
+[0m12:52:30.170764 [debug] [MainThread]: Flushing usage events
+[0m12:52:33.278663 [debug] [MainThread]: An error was encountered while trying to flush usage events
