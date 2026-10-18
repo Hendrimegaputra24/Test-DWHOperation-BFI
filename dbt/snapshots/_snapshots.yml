@@ -1,0 +1,33 @@
+version: 2
+
+snapshots:
+  - name: snap_platform_listing
+    description: >
+      dbt snapshot (SCD Tipe 2) atas atribut listing di platform. Satu baris per listing per versi;
+      versi baru dibuat bila nama listing atau produk kanonik yang cocok berubah. Versi berlaku saat ini
+      adalah baris dengan dbt_valid_to kosong.
+    columns:
+      - name: listing_key
+        description: Kunci listing (hash dari platform dan source_url).
+        data_tests: [not_null]
+      - name: platform
+        description: Nama platform sumber.
+      - name: source_url
+        description: Alamat halaman produk.
+      - name: product_name
+        description: Nama listing di platform (atribut yang dilacak).
+      - name: product_key
+        description: Kunci produk kanonik yang cocok (atribut yang dilacak).
+      - name: brand
+        description: Merek produk.
+      - name: last_seen_date
+        description: Tanggal terakhir listing terlihat (tidak dilacak sebagai perubahan).
+      - name: dbt_scd_id
+        description: Pengenal unik versi baris, dibuat dbt.
+        data_tests: [unique, not_null]
+      - name: dbt_updated_at
+        description: Waktu dbt memperbarui baris ini.
+      - name: dbt_valid_from
+        description: Awal berlaku versi ini (waktu snapshot dijalankan).
+      - name: dbt_valid_to
+        description: Akhir berlaku versi ini; kosong untuk versi yang berlaku saat ini.

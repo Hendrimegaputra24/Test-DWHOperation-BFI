@@ -2,13 +2,14 @@ digraph L {
 rankdir=LR;fontname="Helvetica";nodesep=0.25;ranksep=0.9;bgcolor="white";
 node [shape=box,style="rounded,filled",fontname="Helvetica",fontsize=10,color="#455a64"];
 edge [color="#78909c"];
-subgraph cluster_gold {label="gold";style="rounded,dashed";color="#90a4ae";fontsize=11;
+subgraph cluster_gold {label="gold (termasuk snapshot)";style="rounded,dashed";color="#90a4ae";fontsize=11;
 "model.price_analytics.dim_platform" [label="dim_platform",fillcolor="#fff8e1"];
 "model.price_analytics.fct_product_price_daily" [label="fct_product_price_daily",fillcolor="#fff8e1"];
 "model.price_analytics.dim_product_master" [label="dim_product_master",fillcolor="#fff8e1"];
 "model.price_analytics.dim_platform_listing" [label="dim_platform_listing",fillcolor="#fff8e1"];
 "model.price_analytics.fct_price_recommendation" [label="fct_price_recommendation",fillcolor="#fff8e1"];
 "model.price_analytics.dim_date" [label="dim_date",fillcolor="#fff8e1"];
+"snapshot.price_analytics.snap_platform_listing" [label="snap_platform_listing (snapshot)",fillcolor="#fff8e1"];
 }
 subgraph cluster_report {label="gold / reporting (untuk dashboard)";style="rounded,dashed";color="#90a4ae";fontsize=11;
 "model.price_analytics.rpt_pipeline_summary" [label="rpt_pipeline_summary",fillcolor="#e8f5e9"];
@@ -57,4 +58,5 @@ subgraph cluster_raw {label="raw (source)";style="rounded,dashed";color="#90a4ae
 "seed.price_analytics.brands" -> "model.price_analytics.silver_price_observation";
 "seed.price_analytics.category_map" -> "model.price_analytics.silver_price_observation";
 "model.price_analytics.silver_price_observation" -> "model.price_analytics.silver_product_master";
+"model.price_analytics.silver_price_observation" -> "snapshot.price_analytics.snap_platform_listing";
 }

@@ -91,7 +91,7 @@ python -m pytest -q              # 30 tes
 | `tests/test_api.py` | Login, peran (401, 403, 200), paginasi, filter, validasi (422) |
 | `tests/test_api_reads_gold_only.py` | Statis: semua query API hanya mengacu ke schema `gold` |
 | `tests/test_crawler.py` | Selector cadangan, JSON-LD, validasi, alert, deteksi blokir, robots.txt, jeda, idempotency |
-| `dbt build` | 98 hasil (seed, model, dan tes data) lulus, termasuk 8 tes kustom di `dbt/tests` |
+| `dbt build` | 103 hasil (seed, model, snapshot, dan tes data) lulus, termasuk 9 tes kustom di `dbt/tests` |
 
 Perintah singkat lain ada di `Makefile` (`make pipeline`, `make test`, `make dbt`, `make dbt-docs`; butuh `make`, bisa lewat WSL). Pengguna Windows dapat menjalankan perintah di dalamnya secara langsung.
 
@@ -134,7 +134,7 @@ Prinsip: **crawler (atau loader) hanya menulis ke raw, dbt membangun silver dan 
 │   ├── models/silver         # stg_*, silver_price_observation, silver_product_master
 │   ├── models/gold           # dim_*, fct_*, dan reporting/rpt_* (view untuk dashboard)
 │   ├── seeds/                # brands, category_map, platforms
-│   ├── tests/                # 8 tes kustom (singular)
+│   ├── tests/                # 9 tes kustom (singular)
 │   ├── analyses/             # q1..q4: jawaban pertanyaan bisnis (SQL)
 │   └── macros/               # generate_schema_name (nama schema persis silver/gold)
 ├── api/                      # FastAPI: main, security (JWT, peran), config, db, schemas
@@ -200,7 +200,7 @@ Brand diambil dari daftar (seed), kategori dari pemetaan breadcrumb platform yan
 ### Kualitas data
 
 - **Generik:** `unique`, `not_null`, `relationships`, `accepted_values` pada raw, silver, dan gold.
-- **Kustom (8 tes di `dbt/tests`):** harga lebih dari 0, `discount_pct` antara 0 dan 100, harga tidak melebihi harga asli, grain fakta unik, satu observasi per listing per hari, satu versi berlaku per listing, rentang versi tidak tumpang tindih, rekomendasi tidak di bawah batas bawah.
+- **Kustom (9 tes di `dbt/tests`):** harga lebih dari 0, `discount_pct` antara 0 dan 100, harga tidak melebihi harga asli, grain fakta unik, satu observasi per listing per hari, satu versi berlaku per listing, rentang versi tidak tumpang tindih, satu versi snapshot berlaku per listing, rekomendasi tidak di bawah batas bawah.
 - **Freshness** pada source raw (`warn_after` 36 jam, `error_after` 72 jam). Karena data sampel statis, statusnya akan berubah menjadi `STALE` seiring waktu. Itu perilaku yang benar dan tidak menghentikan pipeline.
 - **Baris bermasalah** (harga kosong, nol, diskon di luar 0 sampai 100, harga lebih besar dari harga asli) **ditandai di silver dan tidak masuk gold**. Pada data sampel ada 65 dari 3.220 observasi, sengaja disisipkan untuk menguji ini.
 
