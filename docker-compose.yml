@@ -1,5 +1,8 @@
 # Satu perintah:  docker compose up --build
 # Urutan: db -> pipeline (skema, muat data, dbt, rekomendasi) -> api
+#
+# OPSIONAL: Airflow (penjadwal) tidak ikut menyala secara bawaan. Nyalakan dengan:
+#   docker compose --profile airflow up -d --build     (UI: http://localhost:8088)
 x-app: &app
   build: .
   image: price-analytics:local
@@ -65,6 +68,38 @@ services:
       pipeline:
         condition: service_completed_successfully
 
+  # Airflow = penjadwal: menjalankan ulang crawl -> dbt build -> rekomendasi tiap malam pukul 01.00.
+  # Hanya menyala dengan:  docker compose --profile airflow up -d --build
+  airflow:
+    profiles: ["airflow"]
+    build:
+      context: .
+      dockerfile: airflow/Dockerfile
+    image: price-airflow:local
+    container_name: price_airflow
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/data/airflow.db
+    ports:
+      - "${AIRFLOW_PORT:-8088}:8080"
+    volumes:
+      - airflow-data:/opt/airflow/data
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+
 volumes:
   pgdata:
   metabase-data:
+  airflow-data:

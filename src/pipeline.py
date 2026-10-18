@@ -2,13 +2,15 @@
 """Pipeline lengkap: skema raw -> muat data -> dbt build -> (freshness) -> rekomendasi harga.
 
 Dipakai oleh `docker compose up` (service `pipeline`) dan bisa dijalankan manual:
-    python src/pipeline.py
+    python src/pipeline.py                 # semua langkah
+    python src/pipeline.py --step ingest   # hanya ambil/muat data (dipakai Airflow)
 
 Setiap langkah dicatat sebagai log JSON (nama, durasi, kode keluar). Langkah wajib yang gagal
 menghentikan pipeline dengan kode keluar 1. Aman dijalankan berulang (idempotent).
 """
 from __future__ import annotations
 
+import argparse
 import json
 import logging
 import os
@@ -177,32 +179,51 @@ def run_cmd(name: str, cmd, fatal: bool) -> bool:
     return ok or not fatal
 
 
-def main() -> int:
+STEP_CHOICES = ("all", "ingest", "transform", "recommend")
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Jalankan pipeline. --step all (bawaan) = semua langkah berurutan, persis seperti sebelumnya.
+    ingest = ambil/muat data ke raw; transform = dbt build + akun baca + freshness;
+    recommend = hitung rekomendasi harga. Pembagian ini dipakai Airflow (satu langkah = satu task)."""
+    ap = argparse.ArgumentParser(description="Pipeline Price Analytics")
+    ap.add_argument("--step", choices=STEP_CHOICES, default="all",
+                    help="langkah yang dijalankan (bawaan: all)")
+    args = ap.parse_args(argv)
+    do_ingest = args.step in ("all", "ingest")
+    do_transform = args.step in ("all", "transform")
+    do_recommend = args.step in ("all", "recommend")
+
     load_env_file(ROOT / ".env")
     t0 = time.time()
-    emit(logging.INFO, "pipeline_start", db_host=os.environ.get("DB_HOST", "localhost"))
+    emit(logging.INFO, "pipeline_start", db_host=os.environ.get("DB_HOST", "localhost"), step=args.step)
     if not wait_for_db():
         return 1
     if ensure_raw_schema() != 0:
         return 1
     py = sys.executable
-    source = choose_data_source(py)
-    if source is None:
-        emit(logging.ERROR, "pipeline_failed", failed_step="choose_data_source")
-        return 1
-    data_dir, pattern = source
-    steps = [
-        ("load_raw", [py, "src/load_raw.py", "--data-dir", data_dir, "--pattern", pattern], True),
-        ("dbt_build", dbt_cmd("build"), True),
-        ("grant_gold_readonly", grant_gold_readonly, True),
-        ("dbt_source_freshness", dbt_cmd("source", "freshness"), False),  # informasi, tidak fatal
-        ("recommend", [py, "src/recommend.py", "--days", "7"], True),
-    ]
+    steps: list[tuple] = []
+    if do_ingest:
+        source = choose_data_source(py)
+        if source is None:
+            emit(logging.ERROR, "pipeline_failed", failed_step="choose_data_source", step=args.step)
+            return 1
+        data_dir, pattern = source
+        steps.append(("load_raw", [py, "src/load_raw.py", "--data-dir", data_dir, "--pattern", pattern], True))
+    if do_transform:
+        steps += [
+            ("dbt_build", dbt_cmd("build"), True),
+            ("grant_gold_readonly", grant_gold_readonly, True),
+            ("dbt_source_freshness", dbt_cmd("source", "freshness"), False),  # informasi, tidak fatal
+        ]
+    if do_recommend:
+        steps.append(("recommend", [py, "src/recommend.py", "--days", "7"], True))
     for name, cmd, fatal in steps:
         if not run_cmd(name, cmd, fatal):
-            emit(logging.ERROR, "pipeline_failed", failed_step=name, seconds=round(time.time() - t0, 1))
+            emit(logging.ERROR, "pipeline_failed", failed_step=name, step=args.step,
+                 seconds=round(time.time() - t0, 1))
             return 1
-    emit(logging.INFO, "pipeline_done", seconds=round(time.time() - t0, 1))
+    emit(logging.INFO, "pipeline_done", step=args.step, seconds=round(time.time() - t0, 1))
     return 0
 
 
