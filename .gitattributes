@@ -1,0 +1,2 @@
+# Skrip shell harus selalu berakhir baris LF (dijalankan di container Linux)
+*.sh text eol=lf

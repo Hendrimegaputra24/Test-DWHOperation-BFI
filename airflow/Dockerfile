@@ -21,6 +21,7 @@ COPY --chown=airflow:root data   /opt/airflow/price/data
 COPY --chown=airflow:root airflow/dags     /opt/airflow/dags
 COPY --chown=airflow:root airflow/start.sh /opt/airflow/start.sh
 
-RUN chmod +x /opt/airflow/start.sh && mkdir -p /opt/airflow/data
+# sed menghapus karakter CR bila berkas tiba dengan akhir baris Windows (CRLF); skrip bash gagal bila ada CR
+RUN sed -i 's/\r$//' /opt/airflow/start.sh && chmod +x /opt/airflow/start.sh && mkdir -p /opt/airflow/data
 
 CMD ["bash", "/opt/airflow/start.sh"]
