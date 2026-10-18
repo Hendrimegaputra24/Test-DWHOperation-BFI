@@ -30,8 +30,8 @@ Sistem kecil dari ujung ke ujung untuk memahami pergerakan harga kompetitor: **i
 **Prasyarat:** Docker Desktop dan Git. Alokasikan memori Docker minimal sekitar 4 GB (Metabase sendiri membutuhkan sekitar 2 GB).
 
 ```bash
-git clone <URL-repository-ini>
-cd price-analytics
+git clone https://github.com/Hendrimegaputra24/Test-DWHOperation-BFI.git
+cd Test-DWHOperation-BFI
 cp .env.example .env            # Windows PowerShell: Copy-Item .env.example .env
 docker compose up --build
 ```
