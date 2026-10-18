@@ -86,6 +86,8 @@ Tiap task hanya jalan bila task sebelumnya sukses; bila gagal diulang 2 kali. Da
 run terjadwal sukses tetapi tidak menambah data baru (`inserted: 0`); yang dibuktikan adalah
 orkestrasinya. Rincian ada di [docs/airflow.md](docs/airflow.md).
 
+**Start pertama bisa lama.** Pada volume baru, Airflow membangun database internalnya dari nol, sehingga butuh sekitar 5 sampai 10 menit sebelum `http://localhost:8088/health` menjawab 200 (status container `health: starting` selama itu normal). Run DAG pertama memakan sekitar 5 menit pada komputer yang tidak sibuk.
+
 ## 2. Mencoba API
 
 Buka http://localhost:8000/docs, lalu:

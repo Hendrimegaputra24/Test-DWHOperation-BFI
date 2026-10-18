@@ -52,3 +52,21 @@ Mematikan: `docker compose --profile airflow down` (tanpa `-v`).
   dbt tidak bentrok dengan paket bawaan Airflow.
 - Hasil uji: DAG dimuat dan dijalankan penuh dengan Airflow 2.10.5 (`airflow dags test`) terhadap
   database kosong; ketiga task sukses berurutan. Tes struktur ada di `tests/test_airflow_dag.py`.
+
+## Start pertama bisa lama
+
+Pada volume baru (pertama kali dinyalakan), Airflow membangun database internalnya dari nol. Di komputer
+pengembang, server web baru menjawab sekitar **6 sampai 8 menit** setelah container menyala; selama itu status
+`health: starting` normal dan tidak perlu diulang atau dihentikan. Cara memeriksa:
+
+```powershell
+docker compose --profile airflow logs airflow 2>&1 | Select-String -Pattern "\[start.sh\]"
+(Invoke-WebRequest http://localhost:8088/health -UseBasicParsing).StatusCode    # 200 = siap
+```
+
+Log `[start.sh]` menampilkan tahapnya: `menunggu webserver siap`, lalu `webserver siap; menyalakan scheduler`.
+Begitu scheduler menyala, satu run DAG langsung dimulai.
+
+Durasi run yang diamati di komputer pengembang: **4 menit 50 detik** saat komputer tidak sibuk, dan
+24 menit 39 detik saat komputer sedang menjalankan banyak layanan lain (hasil dua kali pengamatan; belum
+diukur berulang).
