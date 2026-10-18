@@ -83,7 +83,7 @@ Buka http://localhost:8000/docs, lalu:
 pip install -r requirements.txt
 docker compose up -d db          # database harus menyala
 python src/pipeline.py           # sekali, agar tabel gold terisi (membaca .env)
-python -m pytest -q              # 30 tes
+python -m pytest -q              # 39 tes
 ```
 
 | Tes | Isi |
@@ -178,7 +178,7 @@ Relasi pada diagram bersifat **logis**: dijaga oleh tes `relationships` dbt, buk
 
 ### Riwayat atribut (SCD Tipe 2)
 
-`dim_platform_listing` menyimpan versi nama listing dan produk kanonik yang cocok, dengan `valid_from`, `valid_to` (`9999-12-31` untuk versi berlaku), dan `is_current`. Pada data sampel, 3 dari 115 listing berganti nama, sehingga ada 118 versi. Dihitung dari **tanggal crawl**, bukan dengan `dbt snapshot`: snapshot mencatat waktu dbt dijalankan, jadi pada pemuatan historis sekaligus (seperti data sampel) hasilnya hanya satu versi. Soal membolehkan "snapshot atau yang setara". Dua tes memastikan tiap listing punya tepat satu versi berlaku dan rentang versi tidak tumpang tindih.
+`dim_platform_listing` menyimpan versi nama listing dan produk kanonik yang cocok, dengan `valid_from`, `valid_to` (`9999-12-31` untuk versi berlaku), dan `is_current`. Pada data sampel, 3 dari 115 listing berganti nama, sehingga ada 118 versi. Selain itu ada **dbt snapshot** sungguhan, `snap_platform_listing` (strategi `check` pada nama listing dan produk kanonik). dbt mengisi `dbt_valid_from` dan `dbt_valid_to` dari waktu snapshot dijalankan, sehingga pada pemuatan historis sekaligus hanya terbentuk satu versi dan riwayat bertambah seiring snapshot dijalankan setelah tiap crawl. Mekanismenya dapat didemonstrasikan: `dbt snapshot --vars '{snapshot_as_of_date: 2026-10-01}'` lalu `dbt snapshot` mengubah 115 baris menjadi 118 (3 listing berganti nama). Model `dim_platform_listing` menghitung riwayatnya dari **tanggal crawl**, sehingga riwayat langsung terlihat pada data historis. Dua tes memastikan tiap listing punya tepat satu versi berlaku dan rentang versi tidak tumpang tindih.
 
 ### Strategi incremental
 
@@ -324,7 +324,7 @@ Untuk tiap produk pada satu tanggal: `rekomendasi = max(median harga kompetitor 
 | Kunci idempotency `(platform, source_url, crawl_date, payload_hash)` | Menjalankan ulang aman; crawl ulang di hari yang sama dengan harga berbeda tetap masuk | Silver memilih crawl terbaru per hari |
 | Baris bermasalah ditandai di silver dan **dikeluarkan dari gold** | Lebih baik kosong daripada salah | Ada celah hari (sekitar 2% pada data sampel) |
 | Pencocokan produk berbasis aturan | Sederhana, bisa dijelaskan, bisa diuji | Tidak sekuat fuzzy matching pada data nyata |
-| SCD2 dihitung dari tanggal crawl | Benar pada pemuatan historis | Bukan fitur `dbt snapshot` bawaan |
+| SCD2 dalam dua bentuk: `dbt snapshot` dan model berbasis tanggal crawl | Snapshot sesuai praktik dbt; model memberi riwayat langsung pada pemuatan historis | Dua tabel riwayat yang perlu dijelaskan bedanya |
 | `fct_price_recommendation` incremental dan kosong dari dbt | `dbt run` tidak menghapus rekomendasi dari Python | Tabel diisi di luar dbt |
 | Akun database khusus-baca untuk Metabase | Menunjukkan "membaca hanya dari gold" secara teknis | Hak dibuat ulang tiap run karena dbt membuat ulang tabel |
 | Crawler sopan, berhenti saat ditolak | Sesuai ketentuan soal (ToS dan robots.txt) | Tidak ada data live pada pengujian |
@@ -364,7 +364,7 @@ Proyek ini dikerjakan dengan bantuan asisten AI (Claude, Anthropic) lewat percak
 - perancangan dataset sintetis dan generatornya;
 - draf dokumentasi (README, ringkasan bisnis, panduan dashboard, diagram).
 
-Hasil kerja dijalankan dan diverifikasi di komputer pengembang: pipeline dan `docker compose up`, `dbt build` (seluruh seed, model, dan tes lulus), `pytest` (30 tes lulus), hasil analisis SQL, pengujian API, serta pembuatan dashboard di Metabase. Beberapa masalah lingkungan ditemukan dan diselesaikan saat itu, misalnya port 5432 yang bentrok dengan PostgreSQL lokal dan kesalahan pengisian schema di Metabase. Pengembang siap menjelaskan setiap bagian kode pada sesi wawancara.
+Hasil kerja dijalankan dan diverifikasi di komputer pengembang: pipeline dan `docker compose up`, `dbt build` (seluruh seed, model, dan tes lulus), `pytest` (39 tes lulus), hasil analisis SQL, pengujian API, serta pembuatan dashboard di Metabase. Beberapa masalah lingkungan ditemukan dan diselesaikan saat itu, misalnya port 5432 yang bentrok dengan PostgreSQL lokal dan kesalahan pengisian schema di Metabase. Pengembang siap menjelaskan setiap bagian kode pada sesi wawancara.
 
 ## 15. Tangkapan layar
 
