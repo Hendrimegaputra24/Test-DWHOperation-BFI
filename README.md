@@ -66,6 +66,26 @@ Build pertama dan pipeline memakan beberapa menit. Pada mesin pengembangan (Wind
 
 **Menjalankan ulang aman:** pipeline idempotent. Pemuatan kedua melaporkan `inserted: 0` dan seluruh baris sebagai duplikat yang dilewati.
 
+### Airflow (opsional): penjadwalan otomatis
+
+Airflow menjalankan ulang pengolahan data **tiap malam pukul 01.00 (Asia/Jakarta)**. Ia hanya
+mengatur urutan dan jadwal; pekerjaan sebenarnya dikerjakan skrip yang sama dengan `docker compose up`.
+Airflow **tidak menyala secara bawaan**, jadi cara menjalankan di atas tidak berubah. Untuk menyalakannya:
+
+```bash
+docker compose --profile airflow up -d --build
+```
+
+| Apa | Nilai |
+|---|---|
+| Alamat | http://localhost:8088 |
+| Login | `admin` / `airflow-demo-password` (dari `.env.example`) |
+| DAG | `price_pipeline_daily`: `run_crawler`, lalu `run_dbt_build`, lalu `run_pricing_model` |
+
+Tiap task hanya jalan bila task sebelumnya sukses; bila gagal diulang 2 kali. Data sampel **statis**, jadi
+run terjadwal sukses tetapi tidak menambah data baru (`inserted: 0`); yang dibuktikan adalah
+orkestrasinya. Rincian ada di [docs/airflow.md](docs/airflow.md).
+
 ## 2. Mencoba API
 
 Buka http://localhost:8000/docs, lalu:
@@ -83,7 +103,7 @@ Buka http://localhost:8000/docs, lalu:
 pip install -r requirements.txt
 docker compose up -d db          # database harus menyala
 python src/pipeline.py           # sekali, agar tabel gold terisi (membaca .env)
-python -m pytest -q              # 39 tes
+python -m pytest -q              # 44 tes
 ```
 
 | Tes | Isi |
@@ -91,6 +111,8 @@ python -m pytest -q              # 39 tes
 | `tests/test_api.py` | Login, peran (401, 403, 200), paginasi, filter, validasi (422) |
 | `tests/test_api_reads_gold_only.py` | Statis: semua query API hanya mengacu ke schema `gold` |
 | `tests/test_crawler.py` | Selector cadangan, JSON-LD, validasi, alert, deteksi blokir, robots.txt, jeda, idempotency |
+| `tests/test_check_access.py` | Pengenalan status situs, laporan uji akses, kontak wajib |
+| `tests/test_airflow_dag.py` | Struktur DAG Airflow (jadwal, urutan task), opsi `--step`, profil `airflow` di compose |
 | `dbt build` | 103 hasil (seed, model, snapshot, dan tes data) lulus, termasuk 9 tes kustom di `dbt/tests` |
 
 Perintah singkat lain ada di `Makefile` (`make pipeline`, `make test`, `make dbt`, `make dbt-docs`; butuh `make`, bisa lewat WSL). Pengguna Windows dapat menjalankan perintah di dalamnya secara langsung.
@@ -115,16 +137,17 @@ Prinsip: **crawler (atau loader) hanya menulis ke raw, dbt membangun silver dan 
 
 ```
 .
-├── docker-compose.yml        # db, pipeline, api, metabase
+├── docker-compose.yml        # db, pipeline, api, metabase (+ airflow, opsional)
 ├── Dockerfile                # satu image untuk pipeline dan api
 ├── Makefile                  # perintah singkat
 ├── .env.example              # konfigurasi contoh (nilai demo)
 ├── requirements.txt
 ├── config/selectors.yml      # selector crawler + cadangan, URL awal, ambang alert
+├── airflow/                  # DAG penjadwal (opsional): dags/, Dockerfile, start.sh
 ├── sql/01_raw_schema.sql     # tabel raw.crawl_product_price
 ├── data/sample/              # 28 file JSONL (sintetis), satu per hari crawl
 ├── src/
-│   ├── pipeline.py           # skema -> muat data -> dbt -> role baca -> freshness -> rekomendasi
+│   ├── pipeline.py           # skema -> muat data -> dbt -> role baca -> freshness -> rekomendasi (opsi --step dipakai Airflow)
 │   ├── crawler.py            # crawler sopan, selector cadangan, validasi, alert
 │   ├── load_raw.py           # validasi Pydantic, idempotent ke tabel raw
 │   ├── recommend.py          # model batch rekomendasi harga
@@ -138,7 +161,7 @@ Prinsip: **crawler (atau loader) hanya menulis ke raw, dbt membangun silver dan 
 │   ├── analyses/             # q1..q4: jawaban pertanyaan bisnis (SQL)
 │   └── macros/               # generate_schema_name (nama schema persis silver/gold)
 ├── api/                      # FastAPI: main, security (JWT, peran), config, db, schemas
-├── tests/                    # pytest: API, gold-only, crawler (+ fixtures HTML)
+├── tests/                    # pytest: API, gold-only, crawler, check_access, DAG Airflow (+ fixtures HTML)
 └── docs/
     ├── business_summary.md   # ringkasan satu halaman untuk pimpinan
     ├── dashboard_setup.md    # langkah membuat ulang dashboard
@@ -343,6 +366,7 @@ Untuk tiap produk pada satu tanggal: `rekomendasi = max(median harga kompetitor 
 - **Pengguna API di environment**, API dan batch memakai satu akun database, dan belum ada pembatasan laju login.
 - **Model rekomendasi adalah aturan sederhana** dengan asumsi biaya; tanpa elastisitas harga.
 - **Status freshness** akan menjadi `STALE` karena data statis.
+- **Airflow bersifat demonstrasi.** Data sampel statis, sehingga run terjadwal sukses tetapi tidak menambah data baru; memakai `SequentialExecutor` dengan SQLite (untuk produksi: `LocalExecutor` atau `CeleryExecutor` dengan PostgreSQL).
 - **Waktu pipeline** bergantung sumber daya mesin (sekitar 7 menit pada mesin pengembangan, jauh lebih cepat pada mesin yang lebih besar).
 - Sistem diuji pada satu mesin Windows dengan Docker dan, untuk skrip dan tes, pada PostgreSQL di Linux; belum ada CI.
 
@@ -351,7 +375,7 @@ Untuk tiap produk pada satu tanggal: `rekomendasi = max(median harga kompetitor 
 1. Verifikasi selector pada halaman asli dan uji `PlaywrightFetcher`; tambahkan ke image.
 2. Pencocokan fuzzy dengan antrean tinjauan manual dan metrik akurasi.
 3. Ekspor dashboard sebagai kode (serialisasi Metabase atau skrip API) agar reproduksi otomatis.
-4. Orkestrasi dengan Airflow atau Dagster (`crawl`, `dbt build`, `recommend`, `refresh`) dan GitHub Actions (lint, tes unit, `dbt build` pada data sampel).
+4. Penjadwalan produksi: Airflow sudah tersedia sebagai opsi demonstrasi; untuk produksi gunakan executor dan database metadata yang sesuai, serta tambahkan GitHub Actions (lint, tes unit, `dbt build` pada data sampel).
 5. Pengguna dan peran dari penyedia identitas, akun database baca-saja untuk API, dan rahasia di secrets manager.
 6. Model elastisitas harga dengan data penjualan dan biaya nyata, plus backtest.
 7. Sketsa cloud: object storage (S3 atau OSS) dengan Iceberg, katalog Glue, komputasi Athena atau Trino, orkestrasi MWAA, dan Metabase di container terkelola.
@@ -364,7 +388,7 @@ Proyek ini dikerjakan dengan bantuan asisten AI (Claude, Anthropic) lewat percak
 - perancangan dataset sintetis dan generatornya;
 - draf dokumentasi (README, ringkasan bisnis, panduan dashboard, diagram).
 
-Hasil kerja dijalankan dan diverifikasi di komputer pengembang: pipeline dan `docker compose up`, `dbt build` (seluruh seed, model, dan tes lulus), `pytest` (39 tes lulus), hasil analisis SQL, pengujian API, serta pembuatan dashboard di Metabase. Beberapa masalah lingkungan ditemukan dan diselesaikan saat itu, misalnya port 5432 yang bentrok dengan PostgreSQL lokal dan kesalahan pengisian schema di Metabase. Pengembang siap menjelaskan setiap bagian kode pada sesi wawancara.
+Hasil kerja dijalankan dan diverifikasi di komputer pengembang: pipeline dan `docker compose up`, `dbt build` (seluruh seed, model, dan tes lulus), `pytest` (44 tes lulus), hasil analisis SQL, pengujian API, serta pembuatan dashboard di Metabase. Beberapa masalah lingkungan ditemukan dan diselesaikan saat itu, misalnya port 5432 yang bentrok dengan PostgreSQL lokal dan kesalahan pengisian schema di Metabase. Pengembang siap menjelaskan setiap bagian kode pada sesi wawancara.
 
 ## 15. Tangkapan layar
 
